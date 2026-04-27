@@ -259,6 +259,10 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
+.form-row.four {
+  grid-template-columns: repeat(4, 1fr);
+}
+
 .form-group {
   display: flex;
   flex-direction: column;
@@ -919,7 +923,8 @@
   .card-grid,
   .metric-grid,
   .form-row,
-  .form-row.three {
+  .form-row.three,
+  .form-row.four {
     grid-template-columns: 1fr;
   }
 
