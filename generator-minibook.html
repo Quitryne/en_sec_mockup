@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>미니북 생성 - 영어비서</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <link rel="stylesheet" href="./assets/css/tokens.css">
+  <link rel="stylesheet" href="./assets/css/layout.css">
+  <link rel="stylesheet" href="./assets/css/components.css">
+  <link rel="stylesheet" href="./assets/css/pages.css">
+</head>
+<body data-nav="minibook">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="./index.html"><div class="logo-icon">영</div><span class="logo-text">영어비서</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">생성기</div>
+      <div class="nav-item-expandable open" id="createMenu"><div class="nav-item-header" onclick="toggleMenu('createMenu')"><span class="nav-item-icon">✨</span> 새 컨텐츠 만들기<span class="nav-item-chevron">▼</span></div><div class="nav-submenu"><a class="nav-subitem" data-nav-link="minibook" href="./generator-minibook.html"><span class="nav-subitem-dot"></span> 미니북</a></div></div>
+    </nav>
+    <div class="sidebar-footer"><div class="sidebar-user"><div class="user-avatar">김</div><div class="user-info"><div class="user-name">김영어 선생님</div><div class="user-email">teacher@school.kr</div></div><div class="bean-chip">🫘 240</div></div></div>
+  </aside>
+  <header class="topbar"><div class="topbar-left"><div class="topbar-title">미니북 만들기</div><div class="topbar-breadcrumb">컨텐츠 · 미니북</div></div><div class="topbar-right"><a class="btn btn-primary" href="./preview.html">미리보기</a></div></header>
+  <main class="main">
+    <div class="page-body">
+      <div class="layout-wrap">
+        <div class="content-stack">
+          <section class="section-card">
+            <div class="section-card-title">핵심 구성요소 선택</div>
+            <div class="section-card-desc">학생 반응이 좋은 A5 포터블 형식의 핵심 요약 컨텐츠입니다.</div>
+            <div class="skill-grid">
+              <span class="skill-chip selected">지문분석</span>
+              <span class="skill-chip selected">주제/제목/요약</span>
+              <span class="skill-chip selected">한글해석</span>
+              <span class="skill-chip">주요구문</span>
+              <span class="skill-chip selected">어휘</span>
+            </div>
+            <hr class="section-divider">
+            <div class="toggle-row"><div><div class="toggle-label">기출문제 반영</div><div class="toggle-desc">기존 학교 기출 표현을 일부 반영한 미니북</div></div><div class="toggle-switch on"></div></div>
+            <div class="toggle-row"><div><div class="toggle-label">홍보용 표지 포함</div><div class="toggle-desc">학원 브랜딩과 썸네일 카드 추가</div></div><div class="toggle-switch"></div></div>
+          </section>
+        </div>
+        <aside class="preview-panel">
+          <div class="preview-header"><div class="preview-title">A5 축소 미리보기</div><div class="preview-badge">Portable</div></div>
+          <div class="preview-body">
+            <div class="thumb-card"><strong>MiniBook Layout</strong><p>좌측 상단에 주제/제목, 중앙에 핵심 문장, 하단에 어휘와 해석이 들어가는 2단형 구조.</p></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+  <script src="./assets/js/app.js"></script>
+</body>
+</html>

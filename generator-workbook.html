@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>워크북 생성 - 영어비서</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <link rel="stylesheet" href="./assets/css/tokens.css">
+  <link rel="stylesheet" href="./assets/css/layout.css">
+  <link rel="stylesheet" href="./assets/css/components.css">
+  <link rel="stylesheet" href="./assets/css/pages.css">
+</head>
+<body data-nav="workbook">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="./index.html"><div class="logo-icon">영</div><span class="logo-text">영어비서</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">메인</div>
+      <a class="nav-item" data-nav-link="home" href="./index.html"><span class="nav-item-icon">🏠</span> 홈 대시보드</a>
+      <div class="nav-section-label">생성기</div>
+      <div class="nav-item-expandable open" id="createMenu"><div class="nav-item-header" onclick="toggleMenu('createMenu')"><span class="nav-item-icon">✨</span> 새 컨텐츠 만들기<span class="nav-item-chevron">▼</span></div><div class="nav-submenu"><a class="nav-subitem" data-nav-link="workbook" href="./generator-workbook.html"><span class="nav-subitem-dot"></span> 워크북</a><a class="nav-subitem" data-nav-link="exam" href="./generator-exam.html"><span class="nav-subitem-dot"></span> 동형모의고사</a></div></div>
+    </nav>
+    <div class="sidebar-footer"><div class="sidebar-user"><div class="user-avatar">김</div><div class="user-info"><div class="user-name">김영어 선생님</div><div class="user-email">teacher@school.kr</div></div><div class="bean-chip">🫘 240</div></div></div>
+  </aside>
+  <header class="topbar"><div class="topbar-left"><div class="topbar-title">워크북 / 주간지 만들기</div><div class="topbar-breadcrumb">컨텐츠 · 워크북</div></div><div class="topbar-right"><a class="btn btn-primary" href="./preview.html">미리보기</a></div></header>
+  <main class="main">
+    <div class="page-body">
+      <div class="layout-wrap">
+        <div class="content-stack">
+          <section class="section-card">
+            <div class="section-card-title">문제 유형 조합</div>
+            <div class="section-card-desc">타겟학교 니즈와 강사 취향에 맞춘 조합형 과제 컨텐츠를 표현합니다.</div>
+            <div class="type-grid">
+              <div class="type-card selected"><div class="type-card-icon">✅</div><div class="type-card-name">일치 / T/F</div><div class="type-card-desc">내용 체크형</div></div>
+              <div class="type-card selected"><div class="type-card-icon">🧾</div><div class="type-card-name">어휘 확인</div><div class="type-card-desc">단답 + 선택형</div></div>
+              <div class="type-card selected"><div class="type-card-icon">🛠️</div><div class="type-card-name">어법 확인</div><div class="type-card-desc">객관식 + 서술형</div></div>
+              <div class="type-card"><div class="type-card-icon">🎯</div><div class="type-card-name">주제 / 제목 / 요지</div><div class="type-card-desc">핵심 개념형</div></div>
+              <div class="type-card"><div class="type-card-icon">✍️</div><div class="type-card-name">서술형</div><div class="type-card-desc">영작 / 해석</div></div>
+              <div class="type-card"><div class="type-card-icon">📘</div><div class="type-card-name">기출문제형</div><div class="type-card-desc">실전 대비</div></div>
+            </div>
+          </section>
+          <section class="section-card">
+            <div class="section-card-title">조립된 문제 블록</div>
+            <div class="section-card-desc">문항 수를 조정하는 것처럼 보이는 정적 블록 배열입니다.</div>
+            <div class="kanban-list">
+              <div class="qtype-block"><span class="block-drag-handle">⠿</span><span class="block-num">1</span><span class="block-type-name">일치 / T/F</span><span class="mini-badge">4문항</span></div>
+              <div class="qtype-block"><span class="block-drag-handle">⠿</span><span class="block-num">2</span><span class="block-type-name">어휘 확인</span><span class="mini-badge">6문항</span></div>
+              <div class="qtype-block"><span class="block-drag-handle">⠿</span><span class="block-num">3</span><span class="block-type-name">어법 확인</span><span class="mini-badge">5문항</span></div>
+              <div class="qtype-block"><span class="block-drag-handle">⠿</span><span class="block-num">4</span><span class="block-type-name">서술형</span><span class="mini-badge">3문항</span></div>
+            </div>
+          </section>
+        </div>
+        <aside class="preview-panel">
+          <div class="preview-header"><div class="preview-title">워크북 요약</div><div class="preview-badge">18문항</div></div>
+          <div class="preview-body">
+            <div class="preview-row"><div class="preview-key">스타일</div><div class="preview-val">주간지형 A4 2단</div></div>
+            <div class="preview-row"><div class="preview-key">난이도</div><div class="preview-val">보통 + 어려움 혼합</div></div>
+            <div class="preview-row"><div class="preview-key">적용 범위</div><div class="preview-tags"><span class="preview-tag">교과서</span><span class="preview-tag">부교재</span></div></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+  <script src="./assets/js/app.js"></script>
+</body>
+</html>

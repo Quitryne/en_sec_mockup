@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>어휘 컨텐츠 생성 - 영어비서</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <link rel="stylesheet" href="./assets/css/tokens.css">
+  <link rel="stylesheet" href="./assets/css/layout.css">
+  <link rel="stylesheet" href="./assets/css/components.css">
+  <link rel="stylesheet" href="./assets/css/pages.css">
+</head>
+<body data-nav="vocab">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="./index.html"><div class="logo-icon">영</div><span class="logo-text">영어비서</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">생성기</div>
+      <div class="nav-item-expandable open" id="createMenu"><div class="nav-item-header" onclick="toggleMenu('createMenu')"><span class="nav-item-icon">✨</span> 새 컨텐츠 만들기<span class="nav-item-chevron">▼</span></div><div class="nav-submenu"><a class="nav-subitem" data-nav-link="vocab" href="./generator-vocab.html"><span class="nav-subitem-dot"></span> 어휘</a></div></div>
+    </nav>
+    <div class="sidebar-footer"><div class="sidebar-user"><div class="user-avatar">김</div><div class="user-info"><div class="user-name">김영어 선생님</div><div class="user-email">teacher@school.kr</div></div><div class="bean-chip">🫘 240</div></div></div>
+  </aside>
+  <header class="topbar"><div class="topbar-left"><div class="topbar-title">어휘 컨텐츠 만들기</div><div class="topbar-breadcrumb">컨텐츠 · 어휘</div></div><div class="topbar-right"><a class="btn btn-primary" href="./preview.html">미리보기</a></div></header>
+  <main class="main">
+    <div class="page-body">
+      <div class="layout-wrap">
+        <div class="content-stack">
+          <section class="section-card">
+            <div class="section-card-title">컨텐츠 구성</div>
+            <div class="section-card-desc">단어장과 테스트를 한 세트로 제공하는 목업입니다.</div>
+            <div class="skill-grid">
+              <span class="skill-chip selected">영문</span>
+              <span class="skill-chip selected">한글 뜻</span>
+              <span class="skill-chip">발음기호</span>
+              <span class="skill-chip selected">예문</span>
+              <span class="skill-chip">유의어</span>
+              <span class="skill-chip">반의어</span>
+            </div>
+            <hr class="section-divider">
+            <div class="type-grid">
+              <div class="type-card selected"><div class="type-card-icon">📘</div><div class="type-card-name">단어장</div><div class="type-card-desc">학습용 정리본</div></div>
+              <div class="type-card selected"><div class="type-card-icon">🧪</div><div class="type-card-name">테스트</div><div class="type-card-desc">스펠링 / 뜻 / 예문 활용</div></div>
+              <div class="type-card"><div class="type-card-icon">🗂️</div><div class="type-card-name">세트 저장</div><div class="type-card-desc">개인 DB 누적</div></div>
+            </div>
+          </section>
+        </div>
+        <aside class="preview-panel">
+          <div class="preview-header"><div class="preview-title">어휘 요약</div><div class="preview-badge">2-in-1</div></div>
+          <div class="preview-body">
+            <div class="preview-row"><div class="preview-key">구성</div><div class="preview-val">단어장 + 테스트</div></div>
+            <div class="preview-row"><div class="preview-key">항목</div><div class="preview-tags"><span class="preview-tag">영문</span><span class="preview-tag">뜻</span><span class="preview-tag">예문</span></div></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+  <script src="./assets/js/app.js"></script>
+</body>
+</html>

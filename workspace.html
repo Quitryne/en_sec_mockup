@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>개인 DB / Workspace - 영어비서</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <link rel="stylesheet" href="./assets/css/tokens.css">
+  <link rel="stylesheet" href="./assets/css/layout.css">
+  <link rel="stylesheet" href="./assets/css/components.css">
+  <link rel="stylesheet" href="./assets/css/pages.css">
+</head>
+<body data-nav="workspace">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="./index.html"><div class="logo-icon">영</div><span class="logo-text">영어비서</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">워크스페이스</div>
+      <a class="nav-item" data-nav-link="projects" href="./projects.html"><span class="nav-item-icon">🗂️</span> 프로젝트</a>
+      <a class="nav-item" data-nav-link="workspace" href="./workspace.html"><span class="nav-item-icon">📚</span> 개인 DB / Preset</a>
+      <a class="nav-item" data-nav-link="preview" href="./preview.html"><span class="nav-item-icon">🔎</span> 결과 미리보기</a>
+    </nav>
+    <div class="sidebar-footer"><div class="sidebar-user"><div class="user-avatar">김</div><div class="user-info"><div class="user-name">김영어 선생님</div><div class="user-email">teacher@school.kr</div></div><div class="bean-chip">🫘 240</div></div></div>
+  </aside>
+  <header class="topbar"><div class="topbar-left"><div class="topbar-title">개인 DB + Workspace</div><div class="topbar-breadcrumb">Lock-in 구조 · 프로젝트 히스토리 · 프리셋</div></div><div class="topbar-right"><a class="btn btn-primary" href="./projects.html">프로젝트 이동</a></div></header>
+  <main class="main">
+    <div class="page-body">
+      <div class="metric-grid">
+        <div class="metric-card"><div class="metric-label">누적 프로젝트</div><div class="metric-value">36</div><div class="metric-sub">학교별 히스토리</div></div>
+        <div class="metric-card"><div class="metric-label">디자인 Preset</div><div class="metric-value">28</div><div class="metric-sub">강사 스타일별 저장</div></div>
+        <div class="metric-card"><div class="metric-label">유형 Preset</div><div class="metric-value">14</div><div class="metric-sub">학교/시험별 묶음</div></div>
+        <div class="metric-card"><div class="metric-label">재사용 문서</div><div class="metric-value">84</div><div class="metric-sub">최근 30일</div></div>
+      </div>
+
+      <div class="workspace-grid" style="margin-top:20px;">
+        <section class="section-card">
+          <div class="section-card-title">학교별 프로젝트 히스토리</div>
+          <div class="section-card-desc">쓰면 쓸수록 편해지는 구조를 가장 직접적으로 보여주는 영역입니다.</div>
+          <div class="timeline-list">
+            <div class="timeline-item"><h4>세화고 1학년 2026년 1학기 중간고사</h4><p>교과서 정리, 부교재 워크북, 동형모의고사 1차/2차, 미니북</p></div>
+            <div class="timeline-item"><h4>세화고 2학년 2026년 1학기 중간고사</h4><p>지문분석지, 모의고사 변형 워크북, 해설지, 시험지 분석 리포트</p></div>
+            <div class="timeline-item"><h4>서울고 2학년 2026년 1학기 중간고사</h4><p>어휘장, 워크북, 동형모의고사, 미니북</p></div>
+          </div>
+        </section>
+        <section class="section-card">
+          <div class="section-card-title">저장된 Preset</div>
+          <div class="section-card-desc">디자인 엔진과 생성기 옵션이 누적되는 구조를 카드로 표현합니다.</div>
+          <div class="kanban-list">
+            <div class="qtype-block"><span class="block-num">A</span><span class="block-type-name">세화고 동형모의고사 디자인 Preset A</span></div>
+            <div class="qtype-block"><span class="block-num">B</span><span class="block-type-name">서울고 지문정리 디자인 Preset B</span></div>
+            <div class="qtype-block"><span class="block-num">C</span><span class="block-type-name">세화고 기출문제 유형 Preset</span></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <script src="./assets/js/app.js"></script>
+</body>
+</html>

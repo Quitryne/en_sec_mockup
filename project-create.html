@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>프로젝트 생성 - 영어비서</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <link rel="stylesheet" href="./assets/css/tokens.css">
+  <link rel="stylesheet" href="./assets/css/layout.css">
+  <link rel="stylesheet" href="./assets/css/components.css">
+  <link rel="stylesheet" href="./assets/css/pages.css">
+</head>
+<body data-nav="projects">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="./index.html"><div class="logo-icon">영</div><span class="logo-text">영어비서</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">메인</div>
+      <a class="nav-item" data-nav-link="home" href="./index.html"><span class="nav-item-icon">🏠</span> 홈 대시보드</a>
+      <a class="nav-item" data-nav-link="projects" href="./projects.html"><span class="nav-item-icon">🗂️</span> 프로젝트</a>
+      <div class="nav-section-label">생성기</div>
+      <div class="nav-item-expandable open" id="createMenu"><div class="nav-item-header" onclick="toggleMenu('createMenu')"><span class="nav-item-icon">✨</span> 새 컨텐츠 만들기<span class="nav-item-chevron">▼</span></div><div class="nav-submenu"><a class="nav-subitem" data-nav-link="exam" href="./generator-exam.html"><span class="nav-subitem-dot"></span> 동형모의고사</a><a class="nav-subitem" data-nav-link="analysis" href="./generator-analysis.html"><span class="nav-subitem-dot"></span> 지문분석지</a><a class="nav-subitem" data-nav-link="workbook" href="./generator-workbook.html"><span class="nav-subitem-dot"></span> 워크북</a><a class="nav-subitem" data-nav-link="vocab" href="./generator-vocab.html"><span class="nav-subitem-dot"></span> 어휘</a><a class="nav-subitem" data-nav-link="minibook" href="./generator-minibook.html"><span class="nav-subitem-dot"></span> 미니북</a></div></div>
+    </nav>
+    <div class="sidebar-footer"><div class="sidebar-user"><div class="user-avatar">김</div><div class="user-info"><div class="user-name">김영어 선생님</div><div class="user-email">teacher@school.kr</div></div><div class="bean-chip">🫘 240</div></div></div>
+  </aside>
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-title">프로젝트 생성</div>
+      <div class="topbar-breadcrumb">프로젝트 · 새 프로젝트 만들기</div>
+    </div>
+    <div class="topbar-right">
+      <a class="btn btn-ghost" href="./projects.html">목록으로</a>
+      <a class="btn btn-primary" href="./generator-exam.html">생성기로 이동</a>
+    </div>
+  </header>
+  <main class="main">
+    <div class="page-body">
+      <div class="layout-wrap">
+        <div class="content-stack">
+          <section class="section-card">
+            <div class="section-card-title">프로젝트 기본 정보</div>
+            <div class="section-card-desc">프로젝트는 윈도우 폴더처럼 여러 결과물을 묶는 작업 단위입니다. 시험범위는 이후에도 상시 수정할 수 있습니다.</div>
+            <div class="form-row three">
+              <div class="form-group"><label class="form-label">타겟 학교 <span class="required">*</span></label><input class="form-input" value="세화고등학교 (서울/서초)"><span class="form-hint">학교 검색 버튼을 연결할 자리</span></div>
+              <div class="form-group"><label class="form-label">학년 <span class="required">*</span></label><select class="form-select"><option>고1</option><option>고2</option><option>고3</option></select></div>
+              <div class="form-group"><label class="form-label">학기 / 시험명 <span class="required">*</span></label><input class="form-input" value="2026년 1학기 중간고사"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">프로젝트 이름</label><input class="form-input" value="세화고 1학년 2026년 1학기 중간고사 대비"></div>
+              <div class="form-group"><label class="form-label">교재 라인업</label><input class="form-input" value="교과서 + 모의고사 + 부교재"></div>
+            </div>
+            <div class="form-row single">
+              <div class="form-group"><label class="form-label">시험범위 요약</label><textarea class="form-textarea">교과서 3개 단원, 2025년 기출 4회차, 부교재 2개 파트, handout 1건 포함</textarea></div>
+            </div>
+            <div class="form-row single">
+              <div class="form-group"><label class="form-label">메모</label><textarea class="form-textarea">Final 수업용 동형모의고사와 설명회용 분석 리포트까지 같이 제작 예정.</textarea></div>
+            </div>
+          </section>
+
+          <section class="section-card">
+            <div class="section-card-title">시작할 컨텐츠 유형</div>
+            <div class="section-card-desc">프로젝트 생성 직후 어느 생성기로 진입할지 선택합니다.</div>
+            <div class="type-grid" data-select-group="single">
+              <a class="type-card selected" data-selectable href="./generator-exam.html"><div class="type-card-icon">📝</div><div class="type-card-name">동형모의고사</div><div class="type-card-desc">MVP 우선 흐름</div></a>
+              <a class="type-card" data-selectable href="./generator-analysis.html"><div class="type-card-icon">🔍</div><div class="type-card-name">지문분석지</div><div class="type-card-desc">진도교재 핵심 컨텐츠</div></a>
+              <a class="type-card" data-selectable href="./generator-workbook.html"><div class="type-card-icon">📚</div><div class="type-card-name">워크북</div><div class="type-card-desc">주간지형 과제 컨텐츠</div></a>
+              <a class="type-card" data-selectable href="./generator-vocab.html"><div class="type-card-icon">📖</div><div class="type-card-name">어휘</div><div class="type-card-desc">단어장과 테스트</div></a>
+              <a class="type-card" data-selectable href="./generator-minibook.html"><div class="type-card-icon">📒</div><div class="type-card-name">미니북</div><div class="type-card-desc">A5 요약본</div></a>
+              <div class="type-card" data-selectable><div class="type-card-icon">🗃️</div><div class="type-card-name">나중에 선택</div><div class="type-card-desc">프로젝트만 먼저 생성</div></div>
+            </div>
+          </section>
+        </div>
+        <aside class="preview-panel">
+          <div class="preview-header"><div class="preview-title">프로젝트 요약</div><div class="preview-badge">Draft</div></div>
+          <div class="preview-body">
+            <div class="preview-row"><div class="preview-key">학교</div><div class="preview-val">세화고등학교</div></div>
+            <div class="preview-row"><div class="preview-key">시험</div><div class="preview-val">2026년 1학기 중간고사</div></div>
+            <div class="preview-row"><div class="preview-key">초기 생성기</div><div class="preview-val">동형모의고사</div></div>
+            <div class="preview-row"><div class="preview-key">연결 예정</div><div class="preview-tags"><span class="preview-tag">교과서</span><span class="preview-tag">모의고사</span><span class="preview-tag">부교재</span></div></div>
+          </div>
+        </aside>
+      </div>
+      <div class="bottom-bar">
+        <div class="save-info"><span class="save-dot"></span> 프로젝트 초안이 자동 저장된 상태로 표시됩니다.</div>
+        <div class="btn-row"><a class="btn btn-ghost" href="./projects.html">취소</a><a class="btn btn-primary" href="./generator-exam.html">프로젝트 생성 후 이동</a></div>
+      </div>
+    </div>
+  </main>
+  <script src="./assets/js/app.js"></script>
+</body>
+</html>

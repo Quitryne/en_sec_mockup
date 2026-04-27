@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>영어비서 SPA Mock-up</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <link rel="stylesheet" href="./assets/css/tokens.css">
+  <link rel="stylesheet" href="./assets/css/layout.css">
+  <link rel="stylesheet" href="./assets/css/components.css">
+  <link rel="stylesheet" href="./assets/css/pages.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="sidebar-logo route-link" href="#home" data-route-link="home">
+      <div class="logo-icon">영</div>
+      <span class="logo-text">영어비서</span>
+    </a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">메인</div>
+      <a class="nav-item route-link" href="#home" data-route-link="home"><span class="nav-item-icon">🏠</span> 홈 대시보드</a>
+      <a class="nav-item route-link" href="#projects" data-route-link="projects"><span class="nav-item-icon">🗂️</span> 프로젝트</a>
+
+      <div class="project-context-card">
+        <div class="project-context-label">SELECTED PROJECT</div>
+        <div class="project-context-name" data-project-name>세화고 1학년 2026년 1학기 중간고사</div>
+        <div class="project-context-meta" data-project-meta>세화고등학교 · 고1 · Final 대비</div>
+      </div>
+
+      <div class="nav-section-label">생성기</div>
+      <div class="nav-item-expandable open" id="createMenu">
+        <div class="nav-item-header" onclick="toggleMenu('createMenu')">
+          <span class="nav-item-icon">✨</span> 새 컨텐츠 만들기
+          <span class="nav-item-chevron">▼</span>
+        </div>
+        <div class="nav-submenu">
+          <a class="nav-subitem route-link" href="#exam" data-route-link="exam"><span class="nav-subitem-dot"></span> 동형모의고사</a>
+          <a class="nav-subitem route-link" href="#analysis" data-route-link="analysis"><span class="nav-subitem-dot"></span> 지문분석지</a>
+          <a class="nav-subitem route-link" href="#workbook" data-route-link="workbook"><span class="nav-subitem-dot"></span> 워크북</a>
+          <a class="nav-subitem route-link" href="#vocab" data-route-link="vocab"><span class="nav-subitem-dot"></span> 어휘</a>
+          <a class="nav-subitem route-link" href="#minibook" data-route-link="minibook"><span class="nav-subitem-dot"></span> 미니북</a>
+        </div>
+      </div>
+
+      <div class="nav-section-label">워크스페이스</div>
+      <a class="nav-item route-link" href="#workspace" data-route-link="workspace"><span class="nav-item-icon">📚</span> 개인 DB / Preset</a>
+      <a class="nav-item route-link" href="#preview" data-route-link="preview"><span class="nav-item-icon">🔎</span> 결과 미리보기</a>
+      <a class="nav-item route-link" href="#export" data-route-link="export"><span class="nav-item-icon">📤</span> 출력</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar">김</div>
+        <div class="user-info">
+          <div class="user-name">김영어 선생님</div>
+          <div class="user-email">teacher@school.kr</div>
+        </div>
+        <div class="bean-chip">🫘 240</div>
+      </div>
+    </div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-title" data-spa-title>영어비서 서비스 Mock-up</div>
+      <div class="topbar-breadcrumb" data-spa-crumb>랜딩 · 서비스 포지셔닝</div>
+      <div class="topbar-project-chip">
+        <span class="topbar-project-chip-label">PROJECT</span>
+        <span class="topbar-project-chip-name" data-topbar-project-name>세화고 1학년 2026년 1학기 중간고사</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <a class="btn btn-ghost route-link" href="#projects" data-route-link="projects">프로젝트 보기</a>
+      <a class="btn btn-primary route-link" href="#exam" data-route-link="exam">MVP 시작</a>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="page-body spa-shell">
+      <section class="spa-page active" data-route="home" data-title="영어비서 서비스 Mock-up" data-crumb="랜딩 · 서비스 포지셔닝">
+        <section class="page-hero">
+          <span class="mini-badge">Trusted Quality, Ready to Hand out</span>
+          <h1>영어강사를 위한 시험 대응 워크플로우 OS</h1>
+          <p>시험범위 입력부터 결과물 출력까지 최소 클릭으로 연결하고, 프로젝트 히스토리와 디자인 프리셋을 누적해 쓰면 쓸수록 빨라지는 구조를 단일 SPA로 묶은 목업입니다.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary route-link" href="#projects" data-route-link="projects">프로젝트 보기</a>
+            <a class="btn btn-ghost route-link" href="#workspace" data-route-link="workspace">개인 DB 보기</a>
+          </div>
+          <div class="hero-kpis">
+            <div class="metric-card"><div class="metric-label">핵심 가치</div><div class="metric-value">Speed-first</div><div class="metric-sub">최소 클릭 생성 플로우</div></div>
+            <div class="metric-card"><div class="metric-label">핵심 가치</div><div class="metric-value">Zero-error</div><div class="metric-sub">정답/오타 검증 강조</div></div>
+            <div class="metric-card"><div class="metric-label">핵심 가치</div><div class="metric-value">Preset Lock-in</div><div class="metric-sub">강사별 스타일 누적</div></div>
+          </div>
+        </section>
+
+        <div class="landing-grid">
+          <div class="content-stack">
+            <section class="section-card">
+              <div class="section-card-title">핵심 문제 정의</div>
+              <div class="section-card-desc">PDF 초안의 Pain Point를 SPA 홈에 요약했습니다.</div>
+              <div class="feature-grid">
+                <article class="feature-card"><h3>시험범위 다양성</h3><p>학교·출판사·교사별 범위가 달라 강사 한 명이 여러 시험 범위를 병렬로 관리해야 합니다.</p></article>
+                <article class="feature-card"><h3>개인 DB화의 한계</h3><p>자료는 쌓이지만 다시 찾기 어렵습니다. 프로젝트와 프리셋 축적 구조가 제품의 핵심입니다.</p></article>
+                <article class="feature-card"><h3>Zero-error Quality</h3><p>오타와 정답 오류는 바로 신뢰 문제이므로 검증 패널을 전면에 둡니다.</p></article>
+                <article class="feature-card"><h3>Customized Design</h3><p>강사가 쓰던 HWP 스타일을 닮게 만드는 디자인 엔진 스토리를 카드형으로 보여줍니다.</p></article>
+              </div>
+            </section>
+
+            <section class="section-card">
+              <div class="section-card-title">Service Model Line-up</div>
+              <div class="section-card-desc">각 생성기는 별도 라우트로 전환됩니다.</div>
+              <div class="type-grid">
+                <a class="type-card selected route-link" href="#exam" data-route-link="exam"><div class="type-card-icon">📝</div><div class="type-card-name">동형모의고사</div><div class="type-card-desc">MVP 핵심 흐름</div></a>
+                <a class="type-card route-link" href="#analysis" data-route-link="analysis"><div class="type-card-icon">🔍</div><div class="type-card-name">지문분석지</div><div class="type-card-desc">페이지 조립형 분석지</div></a>
+                <a class="type-card route-link" href="#workbook" data-route-link="workbook"><div class="type-card-icon">📚</div><div class="type-card-name">워크북 / 주간지</div><div class="type-card-desc">유형 조합형 과제 제작</div></a>
+                <a class="type-card route-link" href="#vocab" data-route-link="vocab"><div class="type-card-icon">📖</div><div class="type-card-name">어휘 컨텐츠</div><div class="type-card-desc">단어장 + 테스트</div></a>
+                <a class="type-card route-link" href="#minibook" data-route-link="minibook"><div class="type-card-icon">📒</div><div class="type-card-name">미니북</div><div class="type-card-desc">A5 핵심 요약본</div></a>
+                <a class="type-card route-link" href="#workspace" data-route-link="workspace"><div class="type-card-icon">🗃️</div><div class="type-card-name">개인 DB + Workspace</div><div class="type-card-desc">히스토리 누적 구조</div></a>
+              </div>
+            </section>
+          </div>
+
+          <aside class="preview-panel">
+            <div class="preview-header"><div class="preview-title">차별화 포인트</div><div class="preview-badge">SPA</div></div>
+            <div class="preview-body">
+              <div class="preview-row"><div class="preview-key">핵심 워크플로우</div><div class="preview-val">프로젝트 → 생성 → 검증 → 미리보기 → 출력</div></div>
+              <div class="preview-row"><div class="preview-key">LOCK-IN</div><div class="preview-tags"><span class="preview-tag">개인 DB</span><span class="preview-tag">디자인 Preset</span><span class="preview-tag">프로젝트 히스토리</span></div></div>
+              <div class="preview-cost"><div class="preview-cost-label">현재 포함 라우트</div><div class="preview-cost-val">8</div><div class="preview-cost-sub">해시 라우팅으로 한 파일 안에서 화면 전환</div></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="spa-page" data-route="projects" data-title="프로젝트 목록" data-crumb="워크스페이스 · 프로젝트">
+        <div class="spa-page-head">
+          <div>
+            <div class="spa-page-title">프로젝트 목록</div>
+            <div class="spa-page-desc">학교, 학년, 시험명 기준으로 프로젝트를 찾고 바로 생성기로 진입합니다.</div>
+          </div>
+          <div class="spa-actions">
+            <a class="btn btn-ghost route-link" href="#workspace" data-route-link="workspace">개인 DB</a>
+            <a class="btn btn-primary route-link" href="#exam" data-route-link="exam" data-project-key="sehwa-g1-midterm">새 프로젝트 시작</a>
+          </div>
+        </div>
+        <div class="layout-wrap">
+          <div class="content-stack">
+            <section class="section-card">
+              <div class="form-row three">
+                <div class="form-group"><label class="form-label">학교</label><input class="form-input" value="세화고등학교"></div>
+                <div class="form-group"><label class="form-label">학년</label><select class="form-select"><option>전체</option><option selected>고1</option><option>고2</option></select></div>
+                <div class="form-group"><label class="form-label">시험명</label><input class="form-input" placeholder="예: 1학기 중간고사"></div>
+              </div>
+              <div class="toolbar-row">
+                <a class="btn btn-primary route-link" href="#exam" data-route-link="exam" data-project-key="sehwa-g1-midterm">동형모의고사</a>
+                <a class="btn btn-ghost route-link" href="#analysis" data-route-link="analysis" data-project-key="sehwa-g1-midterm">지문분석지</a>
+                <a class="btn btn-ghost route-link" href="#workbook" data-route-link="workbook" data-project-key="seoul-g2-midterm">워크북</a>
+                <a class="btn btn-ghost route-link" href="#vocab" data-route-link="vocab" data-project-key="seoul-g2-midterm">어휘</a>
+                <a class="btn btn-ghost route-link" href="#minibook" data-route-link="minibook" data-project-key="sehwa-g1-midterm">미니북</a>
+              </div>
+            </section>
+
+            <div class="card-grid">
+              <article class="project-card" data-project-card="sehwa-g1-midterm" data-project-route="exam" tabindex="0" role="button" aria-label="세화고 1학년 프로젝트 열기">
+                <div class="project-card-head"><div><div class="project-title">세화고 1학년 2026년 1학기 중간고사</div><div class="project-meta">세화고등학교 · 고1 · 오늘 14:20 업데이트</div></div><span class="status-soft">활성</span></div>
+                <div class="chip-row"><span class="preview-tag">동형모의고사</span><span class="preview-tag">지문분석지</span><span class="preview-tag">미니북</span></div>
+                <p class="lead-note" style="margin:14px 0;">기출 4회차와 교과서 3개 단원을 연결한 프로젝트.</p>
+                <div class="btn-row"><a class="btn btn-primary route-link" href="#exam" data-route-link="exam" data-project-key="sehwa-g1-midterm">계속 작업</a><a class="btn btn-ghost route-link" href="#preview" data-route-link="preview" data-project-key="sehwa-g1-midterm">미리보기</a></div>
+              </article>
+              <article class="project-card" data-project-card="seoul-g2-midterm" data-project-route="workbook" tabindex="0" role="button" aria-label="서울고 2학년 프로젝트 열기">
+                <div class="project-card-head"><div><div class="project-title">서울고 2학년 2026년 1학기 중간고사</div><div class="project-meta">서울고등학교 · 고2 · 어제 19:40 업데이트</div></div><span class="status-soft">검토중</span></div>
+                <div class="chip-row"><span class="preview-tag">워크북</span><span class="preview-tag">어휘</span></div>
+                <p class="lead-note" style="margin:14px 0;">주간지형 과제 컨텐츠와 어휘 테스트를 결합한 프로젝트.</p>
+                <div class="btn-row"><a class="btn btn-primary route-link" href="#workbook" data-route-link="workbook" data-project-key="seoul-g2-midterm">워크북 열기</a><a class="btn btn-ghost route-link" href="#workspace" data-route-link="workspace" data-project-key="seoul-g2-midterm">히스토리</a></div>
+              </article>
+            </div>
+          </div>
+          <aside class="preview-panel">
+            <div class="preview-header"><div class="preview-title">최근 프로젝트 활동</div><div class="preview-badge">3건</div></div>
+            <div class="preview-body">
+              <div class="preview-row"><div class="preview-key">최근 완료</div><div class="preview-val">세화고 동형모의고사 2차</div></div>
+              <div class="preview-row"><div class="preview-key">최근 저장</div><div class="preview-val">서울고 워크북 Preset B</div></div>
+              <div class="preview-cost"><div class="preview-cost-label">이번 주 생성 예정</div><div class="preview-cost-val">17 Sets</div><div class="preview-cost-sub">동형모의고사 6, 분석지 4, 워크북 5</div></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="spa-page" data-route="exam" data-title="내신 동형모의고사 만들기" data-crumb="컨텐츠 · 동형모의고사 생성">
+        <div class="step-bar">
+          <div class="step-item done"><div class="step-circle">✓</div><span class="step-label">유형 선택</span></div>
+          <div class="step-item active"><div class="step-circle">2</div><span class="step-label">기본 정보</span></div>
+          <div class="step-item"><div class="step-circle">3</div><span class="step-label">소스 구성</span></div>
+          <div class="step-item"><div class="step-circle">4</div><span class="step-label">옵션 설정</span></div>
+          <div class="step-item"><div class="step-circle">5</div><span class="step-label">완료</span></div>
+        </div>
+        <div class="layout-wrap">
+          <div class="content-stack">
+            <section class="section-card">
+              <div class="section-card-title">프로젝트 정보 확인</div>
+              <div class="section-card-desc">프로젝트 기본값을 기반으로 현재 컨텐츠의 기준값을 잡습니다.</div>
+              <div class="form-row single"><div class="form-group"><label class="form-label">컨텐츠 이름 <span class="required">*</span></label><input class="form-input" value="세화고 1학년 2026년 1학기 중간고사 Final 1차"></div></div>
+              <div class="form-row three">
+                <div class="form-group"><label class="form-label">타겟 학교</label><input class="form-input" value="세화고등학교 (서울/서초)"></div>
+                <div class="form-group"><label class="form-label">대상 학년</label><select class="form-select"><option selected>고등학교 1학년</option></select></div>
+                <div class="form-group"><label class="form-label">참고기출</label><select class="form-select"><option selected>2025 1학기 중간 / 기말</option></select></div>
+              </div>
+            </section>
+            <section class="section-card">
+              <div class="section-card-title">기출문제 선택 / 업로드</div>
+              <div class="section-card-desc">DB에서 선택하거나 회사 DB에 없는 기출을 업로드하는 흐름입니다.</div>
+              <table class="list-table">
+                <thead><tr><th>회차</th><th>학년</th><th>상태</th><th>적용</th></tr></thead>
+                <tbody>
+                  <tr><td>2025 1학기 중간</td><td>고1</td><td><span class="status-soft">DB 보유</span></td><td>선택됨</td></tr>
+                  <tr><td>2025 1학기 기말</td><td>고1</td><td><span class="status-soft">DB 보유</span></td><td>선택됨</td></tr>
+                  <tr><td>2024 2학기 기말</td><td>고1</td><td><span class="status-soft">업로드 반영</span></td><td>후보</td></tr>
+                </tbody>
+              </table>
+              <hr class="section-divider">
+              <div class="upload-zone"><div class="upload-icon">📄</div><div class="upload-title">기출 PDF/HWP 업로드 영역</div><div class="upload-desc">실제 업로드는 동작하지 않지만 업로드 후 회사 DB에 반영되는 흐름을 위한 더미 영역입니다.</div></div>
+            </section>
+            <section class="section-card">
+              <div class="section-card-title">출제 범위 선택</div>
+              <div class="section-card-desc">교과서, 모의고사, 부교재, handout을 하나의 플로우 안에서 묶어 보여줍니다.</div>
+              <div class="source-tabs"><span class="source-tab active">교과서</span><span class="source-tab">모의고사</span><span class="source-tab">부교재</span><span class="source-tab">Handout</span><span class="source-tab">직접 입력</span></div>
+              <div class="card-grid">
+                <div class="selectable-card selected"><div class="selectable-card-title">능률 김성곤 1과</div><div class="selectable-card-desc">본문 + After You Read</div></div>
+                <div class="selectable-card selected"><div class="selectable-card-title">능률 김성곤 2과</div><div class="selectable-card-desc">본문 + 핵심 문장</div></div>
+                <div class="selectable-card"><div class="selectable-card-title">2025 6월 모의고사</div><div class="selectable-card-desc">18, 19, 31-34번</div></div>
+                <div class="selectable-card"><div class="selectable-card-title">부교재 올림포스</div><div class="selectable-card-desc">Chapter 4 Reading</div></div>
+              </div>
+            </section>
+            <section class="section-card">
+              <div class="section-card-title">해설지 / 출력 / 디자인 옵션</div>
+              <div class="form-row three">
+                <div class="form-group"><label class="form-label">해설지 옵션</label><select class="form-select"><option>빠른정답</option><option selected>간단해설</option><option>전체해설</option></select></div>
+                <div class="form-group"><label class="form-label">출력 포맷</label><select class="form-select"><option selected>HWP</option><option>HWPX</option><option>PDF</option></select></div>
+                <div class="form-group"><label class="form-label">디자인 프리셋</label><select class="form-select"><option selected>세화고 동형 A</option><option>세화고 동형 B</option><option>학원 표준형</option></select></div>
+              </div>
+              <div class="toggle-row"><div><div class="toggle-label">정답 자동 검증</div><div class="toggle-desc">복수 AI cross-check를 시각적으로 표현</div></div><div class="toggle-switch on"></div></div>
+              <div class="toggle-row"><div><div class="toggle-label">오타 감지</div><div class="toggle-desc">배포 전 오류 검출 단계를 전면에 배치</div></div><div class="toggle-switch on"></div></div>
+              <div class="toggle-row"><div><div class="toggle-label">프로젝트 저장</div><div class="toggle-desc">결과물을 프로젝트 히스토리와 개인 DB에 누적</div></div><div class="toggle-switch on"></div></div>
+            </section>
+          </div>
+          <aside class="preview-panel">
+            <div class="preview-header"><div class="preview-title">생성 요약</div><div class="preview-badge" id="exam-status">검증 대기</div></div>
+            <div class="preview-body">
+              <div class="preview-row"><div class="preview-key">프로젝트</div><div class="preview-val">세화고 1학년 2026년 1학기 중간고사</div></div>
+              <div class="preview-row"><div class="preview-key">선택 범위</div><div class="preview-tags"><span class="preview-tag">교과서 2개 단원</span><span class="preview-tag">기출 2회차</span><span class="preview-tag">부교재 1개</span></div></div>
+              <div class="preview-row"><div class="preview-key">출력</div><div class="preview-val">HWP · 간단해설 · Preset A</div></div>
+              <div class="preview-cost"><div class="preview-cost-label">예상 생성 세트</div><div class="preview-cost-val">1 Set</div><div class="preview-cost-sub">문항 25개, 해설 포함, 검증 패널 표시</div></div>
+              <div class="btn-row" style="margin-top:16px;"><button class="btn btn-primary" data-simulate="exam-status">AI 생성 시뮬레이션</button><a class="btn btn-ghost route-link" href="#preview" data-route-link="preview" data-project-key="sehwa-g1-midterm">결과 보기</a></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="spa-page" data-route="analysis" data-title="지문분석지 만들기" data-crumb="컨텐츠 · 지문분석지">
+        <div class="layout-wrap">
+          <div class="content-stack">
+            <section class="section-card">
+              <div class="section-card-title">페이지 구성 Preset</div>
+              <div class="type-grid">
+                <div class="type-card check-card selected" data-toggle-item><div class="type-card-icon">📄</div><div class="type-card-name">기본 분석형</div><div class="type-card-desc">영문 + 해석 + 어휘</div></div>
+                <div class="type-card check-card" data-toggle-item><div class="type-card-icon">🧠</div><div class="type-card-name">설명회형</div><div class="type-card-desc">주제/요약 강조</div></div>
+                <div class="type-card check-card" data-toggle-item><div class="type-card-icon">🧩</div><div class="type-card-name">직접 조립</div><div class="type-card-desc">드래그 블록형</div></div>
+              </div>
+            </section>
+            <section class="section-card">
+              <div class="section-card-title">구성 블록</div>
+              <div class="kanban-list">
+                <div class="qtype-block selected" data-toggle-item><span class="block-drag-handle">⠿</span><span class="block-num">1</span><span class="block-type-name">영문 원문</span><span class="mini-badge">필수</span></div>
+                <div class="qtype-block selected" data-toggle-item><span class="block-drag-handle">⠿</span><span class="block-num">2</span><span class="block-type-name">한글 해석</span><span class="mini-badge">필수</span></div>
+                <div class="qtype-block" data-toggle-item><span class="block-drag-handle">⠿</span><span class="block-num">3</span><span class="block-type-name">주요 어휘</span><span class="mini-badge">선택</span></div>
+                <div class="qtype-block" data-toggle-item><span class="block-drag-handle">⠿</span><span class="block-num">4</span><span class="block-type-name">구문 해설</span><span class="mini-badge">선택</span></div>
+              </div>
+            </section>
+          </div>
+          <aside class="preview-panel">
+            <div class="preview-header"><div class="preview-title">분석지 요약</div><div class="preview-badge">Preset Applied</div></div>
+            <div class="preview-body">
+              <div class="preview-row"><div class="preview-key">선택 블록</div><div class="preview-tags"><span class="preview-tag">영문</span><span class="preview-tag">해석</span><span class="preview-tag">어휘</span><span class="preview-tag">구문</span></div></div>
+              <div class="preview-row"><div class="preview-key">디자인</div><div class="preview-val">서울고 분석지 B</div></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="spa-page" data-route="workbook" data-title="워크북 / 주간지 만들기" data-crumb="컨텐츠 · 워크북">
+        <div class="layout-wrap">
+          <div class="content-stack">
+            <section class="section-card">
+              <div class="section-card-title">문제 유형 조합</div>
+              <div class="type-grid">
+                <div class="type-card check-card selected" data-toggle-item><div class="type-card-icon">✅</div><div class="type-card-name">일치 / T/F</div><div class="type-card-desc">내용 체크형</div></div>
+                <div class="type-card check-card selected" data-toggle-item><div class="type-card-icon">🧾</div><div class="type-card-name">어휘 확인</div><div class="type-card-desc">단답 + 선택형</div></div>
+                <div class="type-card check-card selected" data-toggle-item><div class="type-card-icon">🛠️</div><div class="type-card-name">어법 확인</div><div class="type-card-desc">객관식 + 서술형</div></div>
+                <div class="type-card check-card" data-toggle-item><div class="type-card-icon">🎯</div><div class="type-card-name">주제 / 제목 / 요지</div><div class="type-card-desc">핵심 개념형</div></div>
+                <div class="type-card check-card" data-toggle-item><div class="type-card-icon">✍️</div><div class="type-card-name">서술형</div><div class="type-card-desc">영작 / 해석</div></div>
+                <div class="type-card check-card" data-toggle-item><div class="type-card-icon">📘</div><div class="type-card-name">기출문제형</div><div class="type-card-desc">실전 대비</div></div>
+              </div>
+            </section>
+          </div>
+          <aside class="preview-panel">
+            <div class="preview-header"><div class="preview-title">워크북 요약</div><div class="preview-badge">18문항</div></div>
+            <div class="preview-body"><div class="preview-row"><div class="preview-key">스타일</div><div class="preview-val">주간지형 A4 2단</div></div><div class="preview-row"><div class="preview-key">난이도</div><div class="preview-val">보통 + 어려움 혼합</div></div></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="spa-page" data-route="vocab" data-title="어휘 컨텐츠 만들기" data-crumb="컨텐츠 · 어휘">
+        <div class="layout-wrap">
+          <div class="content-stack">
+            <section class="section-card">
+              <div class="section-card-title">컨텐츠 구성</div>
+              <div class="skill-grid">
+                <span class="skill-chip selected" data-toggle-item>영문</span>
+                <span class="skill-chip selected" data-toggle-item>한글 뜻</span>
+                <span class="skill-chip" data-toggle-item>발음기호</span>
+                <span class="skill-chip selected" data-toggle-item>예문</span>
+                <span class="skill-chip" data-toggle-item>유의어</span>
+                <span class="skill-chip" data-toggle-item>반의어</span>
+              </div>
+              <hr class="section-divider">
+              <div class="type-grid">
+                <div class="type-card check-card selected" data-toggle-item><div class="type-card-icon">📘</div><div class="type-card-name">단어장</div><div class="type-card-desc">학습용 정리본</div></div>
+                <div class="type-card check-card selected" data-toggle-item><div class="type-card-icon">🧪</div><div class="type-card-name">테스트</div><div class="type-card-desc">스펠링 / 뜻 / 예문 활용</div></div>
+                <div class="type-card check-card" data-toggle-item><div class="type-card-icon">🗂️</div><div class="type-card-name">세트 저장</div><div class="type-card-desc">개인 DB 누적</div></div>
+              </div>
+            </section>
+          </div>
+          <aside class="preview-panel">
+            <div class="preview-header"><div class="preview-title">어휘 요약</div><div class="preview-badge">2-in-1</div></div>
+            <div class="preview-body"><div class="preview-row"><div class="preview-key">구성</div><div class="preview-val">단어장 + 테스트</div></div></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="spa-page" data-route="minibook" data-title="미니북 만들기" data-crumb="컨텐츠 · 미니북">
+        <div class="layout-wrap">
+          <div class="content-stack">
+            <section class="section-card">
+              <div class="section-card-title">핵심 구성요소 선택</div>
+              <div class="skill-grid">
+                <span class="skill-chip selected">지문분석</span>
+                <span class="skill-chip selected">주제/제목/요약</span>
+                <span class="skill-chip selected">한글해석</span>
+                <span class="skill-chip">주요구문</span>
+                <span class="skill-chip selected">어휘</span>
+              </div>
+              <hr class="section-divider">
+              <div class="toggle-row"><div><div class="toggle-label">기출문제 반영</div><div class="toggle-desc">기존 학교 기출 표현을 일부 반영한 미니북</div></div><div class="toggle-switch on"></div></div>
+              <div class="toggle-row"><div><div class="toggle-label">홍보용 표지 포함</div><div class="toggle-desc">학원 브랜딩과 썸네일 카드 추가</div></div><div class="toggle-switch"></div></div>
+            </section>
+          </div>
+          <aside class="preview-panel">
+            <div class="preview-header"><div class="preview-title">A5 축소 미리보기</div><div class="preview-badge">Portable</div></div>
+            <div class="preview-body"><div class="thumb-card"><strong>MiniBook Layout</strong><p>좌측 상단에 주제/제목, 하단에 어휘와 해석이 들어가는 2단형 구조.</p></div></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="spa-page" data-route="workspace" data-title="개인 DB + Workspace" data-crumb="Lock-in 구조 · 프로젝트 히스토리 · 프리셋">
+        <div class="metric-grid">
+          <div class="metric-card"><div class="metric-label">누적 프로젝트</div><div class="metric-value">36</div><div class="metric-sub">학교별 히스토리</div></div>
+          <div class="metric-card"><div class="metric-label">디자인 Preset</div><div class="metric-value">28</div><div class="metric-sub">강사 스타일별 저장</div></div>
+          <div class="metric-card"><div class="metric-label">유형 Preset</div><div class="metric-value">14</div><div class="metric-sub">학교/시험별 묶음</div></div>
+          <div class="metric-card"><div class="metric-label">재사용 문서</div><div class="metric-value">84</div><div class="metric-sub">최근 30일</div></div>
+        </div>
+        <section class="section-card" style="margin-top:20px;">
+          <div class="section-card-title">현재 선택 프로젝트 컨텍스트</div>
+          <div class="section-card-desc">선택된 프로젝트에 따라 아래 히스토리와 Preset 정보가 바뀌는 목업입니다.</div>
+          <div class="project-context-name" data-workspace-project-name>세화고 1학년 2026년 1학기 중간고사</div>
+          <div class="project-context-meta" data-workspace-project-meta>세화고등학교 · 고1 · Final 대비</div>
+        </section>
+        <div class="workspace-grid" style="margin-top:20px;">
+          <section class="section-card">
+            <div class="section-card-title">학교별 프로젝트 히스토리</div>
+            <div class="timeline-list">
+              <div class="timeline-item"><h4 data-workspace-history-title-1>세화고 1학년 2026년 1학기 중간고사</h4><p data-workspace-history-desc-1>교과서 정리, 부교재 워크북, 동형모의고사 1차/2차, 미니북</p></div>
+              <div class="timeline-item"><h4 data-workspace-history-title-2>세화고 2학년 2026년 1학기 중간고사</h4><p data-workspace-history-desc-2>지문분석지, 모의고사 변형 워크북, 해설지, 시험지 분석 리포트</p></div>
+              <div class="timeline-item"><h4 data-workspace-history-title-3>서울고 2학년 2026년 1학기 중간고사</h4><p data-workspace-history-desc-3>어휘장, 워크북, 동형모의고사, 미니북</p></div>
+            </div>
+          </section>
+          <section class="section-card">
+            <div class="section-card-title">저장된 Preset</div>
+            <div class="kanban-list">
+              <div class="qtype-block"><span class="block-num">A</span><span class="block-type-name" data-workspace-preset-1>세화고 동형모의고사 디자인 Preset A</span></div>
+              <div class="qtype-block"><span class="block-num">B</span><span class="block-type-name" data-workspace-preset-2>서울고 지문정리 디자인 Preset B</span></div>
+              <div class="qtype-block"><span class="block-num">C</span><span class="block-type-name" data-workspace-preset-3>세화고 기출문제 유형 Preset</span></div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="spa-page" data-route="preview" data-title="결과 미리보기" data-crumb="검증 · 미리보기 · 출력 직전">
+        <div class="spa-viewer">
+          <div class="viewer-sheet-grid">
+            <div class="viewer-side">
+              <div class="mini-thumb"><strong>1p 표지</strong><p>세화고 Final 1차</p></div>
+              <div class="mini-thumb"><strong>2p 문항</strong><p>주제/제목 유형</p></div>
+              <div class="mini-thumb"><strong>3p 문항</strong><p>빈칸 + 어법</p></div>
+              <div class="mini-thumb"><strong>4p 해설</strong><p>간단해설 버전</p></div>
+            </div>
+            <div class="viewer-stage">
+              <div class="document-sheet">
+                <h2 data-preview-doc-title>세화고 1학년 2026년 1학기 중간고사 Final 1차</h2>
+                <p data-preview-doc-meta>Preset: 세화고 동형 A · 출력 형식: HWP · 해설지: 간단해설</p>
+                <hr class="preview-divider">
+                <ol>
+                  <li data-preview-item-1>다음 글의 제목으로 가장 적절한 것을 고르시오.</li>
+                  <li data-preview-item-2>빈칸에 들어갈 말로 가장 적절한 것은?</li>
+                  <li data-preview-item-3>밑줄 친 부분 중 어법상 틀린 것을 고르시오.</li>
+                  <li data-preview-item-4>글의 흐름으로 보아 주어진 문장이 들어갈 위치는?</li>
+                </ol>
+              </div>
+            </div>
+            <aside class="viewer-panel">
+              <div class="preview-row"><div class="preview-key">정답 검증</div><div class="preview-val">검증 통과</div></div>
+              <div class="preview-row"><div class="preview-key">오타 감지</div><div class="preview-val">0건</div></div>
+              <div class="preview-row"><div class="preview-key">디자인 Preset</div><div class="preview-val" data-preview-preset>세화고 동형 A</div></div>
+              <div class="preview-row"><div class="preview-key">수정 포인트</div><div class="preview-tags"><span class="preview-tag" data-preview-tag-1>3번 문항 보기 길이</span><span class="preview-tag" data-preview-tag-2>해설 줄간격</span></div></div>
+              <div class="btn-row" style="margin-top:16px;"><a class="btn btn-primary route-link" href="#export" data-route-link="export" data-project-key="sehwa-g1-midterm">출력으로</a></div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="spa-page" data-route="export" data-title="출력 포맷 선택" data-crumb="출력 · 다운로드 직전">
+        <div class="layout-wrap">
+          <div class="content-stack">
+            <section class="section-card">
+              <div class="section-card-title">출력 포맷</div>
+              <div class="type-grid">
+                <div class="type-card selected"><div class="type-card-icon">📝</div><div class="type-card-name">HWP</div><div class="type-card-desc">강사용 최우선 포맷</div></div>
+                <div class="type-card"><div class="type-card-icon">📄</div><div class="type-card-name">HWPX</div><div class="type-card-desc">호환형 저장</div></div>
+                <div class="type-card"><div class="type-card-icon">📕</div><div class="type-card-name">PDF</div><div class="type-card-desc">배포용 보기본</div></div>
+              </div>
+            </section>
+            <section class="section-card">
+              <div class="section-card-title">출력 옵션</div>
+              <div class="toggle-row"><div><div class="toggle-label">간단해설 포함</div><div class="toggle-desc">문제지와 함께 해설 페이지 출력</div></div><div class="toggle-switch on"></div></div>
+              <div class="toggle-row"><div><div class="toggle-label">정답지만 별도 출력</div><div class="toggle-desc">빠른정답 버전 추가 생성</div></div><div class="toggle-switch on"></div></div>
+              <div class="toggle-row"><div><div class="toggle-label">Preset 스타일 유지</div><div class="toggle-desc">세화고 동형 A의 폰트/줄간격 적용</div></div><div class="toggle-switch on"></div></div>
+            </section>
+          </div>
+          <aside class="preview-panel">
+            <div class="preview-header"><div class="preview-title">최종 출력 요약</div><div class="preview-badge">Ready</div></div>
+            <div class="preview-body">
+              <div class="preview-row"><div class="preview-key">문서명</div><div class="preview-val" data-export-doc-title>세화고 1학년 2026년 1학기 중간고사 Final 1차</div></div>
+              <div class="preview-row"><div class="preview-key">포맷</div><div class="preview-val" data-export-format>HWP</div></div>
+              <div class="preview-row"><div class="preview-key">해설</div><div class="preview-val" data-export-commentary>간단해설 포함</div></div>
+              <div class="preview-row"><div class="preview-key">스타일</div><div class="preview-val" data-export-preset>세화고 동형 A</div></div>
+              <div class="preview-cost"><div class="preview-cost-label">출력 준비 상태</div><div class="preview-cost-val" data-export-progress>100%</div><div class="preview-cost-sub" data-export-note>실제 다운로드는 연결하지 않은 목업입니다.</div></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="./assets/js/app.js"></script>
+  <script src="./assets/js/state-demo.js"></script>
+  <script src="./assets/js/spa.js"></script>
+</body>
+</html>

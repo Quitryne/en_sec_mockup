@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>프로젝트 목록 - 영어비서</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <link rel="stylesheet" href="./assets/css/tokens.css">
+  <link rel="stylesheet" href="./assets/css/layout.css">
+  <link rel="stylesheet" href="./assets/css/components.css">
+  <link rel="stylesheet" href="./assets/css/pages.css">
+</head>
+<body data-nav="projects">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="./index.html"><div class="logo-icon">영</div><span class="logo-text">영어비서</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">메인</div>
+      <a class="nav-item" data-nav-link="home" href="./index.html"><span class="nav-item-icon">🏠</span> 홈 대시보드</a>
+      <a class="nav-item" data-nav-link="projects" href="./projects.html"><span class="nav-item-icon">🗂️</span> 프로젝트</a>
+      <div class="nav-section-label">생성기</div>
+      <div class="nav-item-expandable" id="createMenu"><div class="nav-item-header" onclick="toggleMenu('createMenu')"><span class="nav-item-icon">✨</span> 새 컨텐츠 만들기<span class="nav-item-chevron">▼</span></div><div class="nav-submenu"><a class="nav-subitem" data-nav-link="exam" href="./generator-exam.html"><span class="nav-subitem-dot"></span> 동형모의고사</a><a class="nav-subitem" data-nav-link="analysis" href="./generator-analysis.html"><span class="nav-subitem-dot"></span> 지문분석지</a><a class="nav-subitem" data-nav-link="workbook" href="./generator-workbook.html"><span class="nav-subitem-dot"></span> 워크북</a><a class="nav-subitem" data-nav-link="vocab" href="./generator-vocab.html"><span class="nav-subitem-dot"></span> 어휘</a><a class="nav-subitem" data-nav-link="minibook" href="./generator-minibook.html"><span class="nav-subitem-dot"></span> 미니북</a></div></div>
+      <div class="nav-section-label">워크스페이스</div>
+      <a class="nav-item" data-nav-link="workspace" href="./workspace.html"><span class="nav-item-icon">📚</span> 개인 DB / Preset</a>
+      <a class="nav-item" data-nav-link="export" href="./export.html"><span class="nav-item-icon">📤</span> 출력</a>
+    </nav>
+    <div class="sidebar-footer"><div class="sidebar-user"><div class="user-avatar">김</div><div class="user-info"><div class="user-name">김영어 선생님</div><div class="user-email">teacher@school.kr</div></div><div class="bean-chip">🫘 240</div></div></div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-title">프로젝트 목록</div>
+      <div class="topbar-breadcrumb">워크스페이스 · 프로젝트</div>
+    </div>
+    <div class="topbar-right">
+      <a class="btn btn-ghost" href="./workspace.html">개인 DB</a>
+      <a class="btn btn-primary" href="./project-create.html">새 프로젝트</a>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="page-body">
+      <div class="layout-wrap">
+        <div class="content-stack">
+          <section class="section-card">
+            <div class="section-card-title">검색 및 빠른 진입</div>
+            <div class="section-card-desc">학교, 학년, 시험명 기준으로 프로젝트를 찾고 바로 생성기로 이동합니다.</div>
+            <div class="form-row three">
+              <div class="form-group"><label class="form-label">학교</label><input class="form-input" value="세화고등학교"></div>
+              <div class="form-group"><label class="form-label">학년</label><select class="form-select"><option>전체</option><option selected>고1</option><option>고2</option></select></div>
+              <div class="form-group"><label class="form-label">시험명</label><input class="form-input" placeholder="예: 1학기 중간고사"></div>
+            </div>
+            <div class="toolbar-row">
+              <a class="btn btn-primary" href="./generator-exam.html">동형모의고사 만들기</a>
+              <a class="btn btn-ghost" href="./generator-analysis.html">지문분석지</a>
+              <a class="btn btn-ghost" href="./generator-workbook.html">워크북</a>
+              <a class="btn btn-ghost" href="./generator-vocab.html">어휘</a>
+              <a class="btn btn-ghost" href="./generator-minibook.html">미니북</a>
+            </div>
+          </section>
+
+          <div class="metric-grid">
+            <div class="metric-card"><div class="metric-label">전체 프로젝트</div><div class="metric-value">36</div><div class="metric-sub">이번 시험기간 기준</div></div>
+            <div class="metric-card"><div class="metric-label">활성 상태</div><div class="metric-value">12</div><div class="metric-sub">출력 대기 포함</div></div>
+            <div class="metric-card"><div class="metric-label">저장된 프리셋</div><div class="metric-value">28</div><div class="metric-sub">강사별 디자인 포함</div></div>
+            <div class="metric-card"><div class="metric-label">검증 통과본</div><div class="metric-value">84</div><div class="metric-sub">최근 30일</div></div>
+          </div>
+
+          <div class="card-grid" style="margin-top:20px;">
+            <article class="project-card">
+              <div class="project-card-head">
+                <div>
+                  <div class="project-title">세화고 1학년 2026년 1학기 중간고사</div>
+                  <div class="project-meta">세화고등학교 · 고1 · 오늘 14:20 업데이트</div>
+                </div>
+                <span class="status-soft">활성</span>
+              </div>
+              <div class="chip-row">
+                <span class="preview-tag">동형모의고사</span>
+                <span class="preview-tag">지문분석지</span>
+                <span class="preview-tag">미니북</span>
+              </div>
+              <p class="lead-note" style="margin:14px 0;">기출 4회차와 교과서 3개 단원을 연결한 프로젝트. Final 수업용 동형모의고사 2차까지 생성된 상태.</p>
+              <div class="btn-row">
+                <a class="btn btn-primary" href="./generator-exam.html">계속 작업</a>
+                <a class="btn btn-ghost" href="./preview.html">미리보기</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-card-head">
+                <div>
+                  <div class="project-title">서울고 2학년 2026년 1학기 중간고사</div>
+                  <div class="project-meta">서울고등학교 · 고2 · 어제 19:40 업데이트</div>
+                </div>
+                <span class="status-soft">검토중</span>
+              </div>
+              <div class="chip-row">
+                <span class="preview-tag">워크북</span>
+                <span class="preview-tag">어휘</span>
+              </div>
+              <p class="lead-note" style="margin:14px 0;">주간지형 과제 컨텐츠와 어휘 테스트를 결합한 프로젝트. 디자인 프리셋 B가 적용되어 있습니다.</p>
+              <div class="btn-row">
+                <a class="btn btn-primary" href="./generator-workbook.html">워크북 열기</a>
+                <a class="btn btn-ghost" href="./workspace.html">히스토리</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-card-head">
+                <div>
+                  <div class="project-title">대원외고 1학년 2026년 기말 대비</div>
+                  <div class="project-meta">대원외고 · 고1 · 4월 25일</div>
+                </div>
+                <span class="status-soft">보관</span>
+              </div>
+              <div class="chip-row">
+                <span class="preview-tag">지문분석지</span>
+                <span class="preview-tag">동형모의고사</span>
+              </div>
+              <p class="lead-note" style="margin:14px 0;">직접 업로드한 handout과 부교재를 반영한 사례. 다시 복제해서 이번 시험 대비용으로 변형 가능합니다.</p>
+              <div class="btn-row">
+                <a class="btn btn-primary" href="./project-create.html">복제 시작</a>
+                <a class="btn btn-ghost" href="./preview.html">결과 보기</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-card-head">
+                <div>
+                  <div class="project-title">새 프로젝트 시작</div>
+                  <div class="project-meta">프로젝트 생성 화면으로 이동</div>
+                </div>
+                <span class="status-soft">Quick Start</span>
+              </div>
+              <p class="lead-note" style="margin:14px 0;">학교, 학년, 시험범위만 잡고 바로 생성기에 들어가는 흐름입니다. 이후 시험범위는 계속 수정할 수 있습니다.</p>
+              <div class="btn-row">
+                <a class="btn btn-primary" href="./project-create.html">프로젝트 생성</a>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <aside class="preview-panel">
+          <div class="preview-header">
+            <div class="preview-title">최근 프로젝트 활동</div>
+            <div class="preview-badge">3건</div>
+          </div>
+          <div class="preview-body">
+            <div class="preview-row"><div class="preview-key">최근 완료</div><div class="preview-val">세화고 동형모의고사 2차</div></div>
+            <div class="preview-row"><div class="preview-key">최근 저장</div><div class="preview-val">서울고 워크북 Preset B</div></div>
+            <div class="preview-row"><div class="preview-key">추천 액션</div><div class="preview-val">프로젝트별 출력 화면 정리</div></div>
+            <div class="preview-cost"><div class="preview-cost-label">이번 주 생성 예정</div><div class="preview-cost-val">17 Sets</div><div class="preview-cost-sub">동형모의고사 6, 분석지 4, 워크북 5, 미니북 2</div></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+  <script src="./assets/js/app.js"></script>
+</body>
+</html>

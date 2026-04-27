@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>출력 - 영어비서</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <link rel="stylesheet" href="./assets/css/tokens.css">
+  <link rel="stylesheet" href="./assets/css/layout.css">
+  <link rel="stylesheet" href="./assets/css/components.css">
+  <link rel="stylesheet" href="./assets/css/pages.css">
+</head>
+<body data-nav="export">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="./index.html"><div class="logo-icon">영</div><span class="logo-text">영어비서</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">워크스페이스</div>
+      <a class="nav-item" data-nav-link="preview" href="./preview.html"><span class="nav-item-icon">🔎</span> 결과 미리보기</a>
+      <a class="nav-item" data-nav-link="export" href="./export.html"><span class="nav-item-icon">📤</span> 출력</a>
+    </nav>
+    <div class="sidebar-footer"><div class="sidebar-user"><div class="user-avatar">김</div><div class="user-info"><div class="user-name">김영어 선생님</div><div class="user-email">teacher@school.kr</div></div><div class="bean-chip">🫘 240</div></div></div>
+  </aside>
+  <header class="topbar"><div class="topbar-left"><div class="topbar-title">출력 포맷 선택</div><div class="topbar-breadcrumb">출력 · 다운로드 직전</div></div><div class="topbar-right"><a class="btn btn-primary" href="./preview.html">미리보기로</a></div></header>
+  <main class="main">
+    <div class="page-body">
+      <div class="layout-wrap">
+        <div class="content-stack">
+          <section class="section-card">
+            <div class="section-card-title">출력 포맷</div>
+            <div class="section-card-desc">HWP 출력을 강조하면서 PDF/HWPX도 함께 배치합니다.</div>
+            <div class="type-grid" data-select-group="single">
+              <div class="type-card selected" data-selectable><div class="type-card-icon">📝</div><div class="type-card-name">HWP</div><div class="type-card-desc">강사용 최우선 포맷</div></div>
+              <div class="type-card" data-selectable><div class="type-card-icon">📄</div><div class="type-card-name">HWPX</div><div class="type-card-desc">호환형 저장</div></div>
+              <div class="type-card" data-selectable><div class="type-card-icon">📕</div><div class="type-card-name">PDF</div><div class="type-card-desc">배포용 보기본</div></div>
+            </div>
+          </section>
+          <section class="section-card">
+            <div class="section-card-title">출력 옵션</div>
+            <div class="section-card-desc">실제 export 없이 전달 직전의 설정 화면만 제공합니다.</div>
+            <div class="toggle-row"><div><div class="toggle-label">간단해설 포함</div><div class="toggle-desc">문제지와 함께 해설 페이지 출력</div></div><div class="toggle-switch on"></div></div>
+            <div class="toggle-row"><div><div class="toggle-label">정답지만 별도 출력</div><div class="toggle-desc">빠른정답 버전 추가 생성</div></div><div class="toggle-switch on"></div></div>
+            <div class="toggle-row"><div><div class="toggle-label">Preset 스타일 유지</div><div class="toggle-desc">세화고 동형 A의 폰트/줄간격 적용</div></div><div class="toggle-switch on"></div></div>
+          </section>
+        </div>
+        <aside class="preview-panel">
+          <div class="preview-header"><div class="preview-title">최종 출력 요약</div><div class="preview-badge">Ready</div></div>
+          <div class="preview-body">
+            <div class="preview-row"><div class="preview-key">포맷</div><div class="preview-val">HWP</div></div>
+            <div class="preview-row"><div class="preview-key">해설</div><div class="preview-val">간단해설 포함</div></div>
+            <div class="preview-row"><div class="preview-key">스타일</div><div class="preview-val">세화고 동형 A</div></div>
+            <div class="preview-cost"><div class="preview-cost-label">출력 준비 상태</div><div class="preview-cost-val">100%</div><div class="preview-cost-sub">실제 다운로드는 연결하지 않은 목업입니다.</div></div>
+          </div>
+        </aside>
+      </div>
+      <div class="bottom-bar">
+        <div class="save-info"><span class="save-dot"></span> 출력용 설정이 프로젝트에 저장된 것처럼 보이게 처리</div>
+        <div class="btn-row"><a class="btn btn-ghost" href="./preview.html">이전</a><button class="btn btn-primary">최종 다운로드 Mock</button></div>
+      </div>
+    </div>
+  </main>
+  <script src="./assets/js/app.js"></script>
+</body>
+</html>

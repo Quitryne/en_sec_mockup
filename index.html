@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>영어비서 Mock-up</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <link rel="stylesheet" href="./assets/css/tokens.css">
+  <link rel="stylesheet" href="./assets/css/layout.css">
+  <link rel="stylesheet" href="./assets/css/components.css">
+  <link rel="stylesheet" href="./assets/css/pages.css">
+</head>
+<body data-nav="home">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="./index.html">
+      <div class="logo-icon">영</div>
+      <span class="logo-text">영어비서</span>
+    </a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">메인</div>
+      <a class="nav-item" data-nav-link="home" href="./index.html"><span class="nav-item-icon">🏠</span> 홈 대시보드</a>
+      <a class="nav-item" data-nav-link="projects" href="./projects.html"><span class="nav-item-icon">🗂️</span> 프로젝트</a>
+      <div class="nav-section-label">생성기</div>
+      <div class="nav-item-expandable open" id="createMenu">
+        <div class="nav-item-header" onclick="toggleMenu('createMenu')">
+          <span class="nav-item-icon">✨</span> 새 컨텐츠 만들기
+          <span class="nav-item-chevron">▼</span>
+        </div>
+        <div class="nav-submenu">
+          <a class="nav-subitem" data-nav-link="exam" href="./generator-exam.html"><span class="nav-subitem-dot"></span> 동형모의고사</a>
+          <a class="nav-subitem" data-nav-link="analysis" href="./generator-analysis.html"><span class="nav-subitem-dot"></span> 지문분석지</a>
+          <a class="nav-subitem" data-nav-link="workbook" href="./generator-workbook.html"><span class="nav-subitem-dot"></span> 워크북</a>
+          <a class="nav-subitem" data-nav-link="vocab" href="./generator-vocab.html"><span class="nav-subitem-dot"></span> 어휘</a>
+          <a class="nav-subitem" data-nav-link="minibook" href="./generator-minibook.html"><span class="nav-subitem-dot"></span> 미니북</a>
+        </div>
+      </div>
+      <div class="nav-section-label">워크스페이스</div>
+      <a class="nav-item" data-nav-link="workspace" href="./workspace.html"><span class="nav-item-icon">📚</span> 개인 DB / Preset</a>
+      <a class="nav-item" data-nav-link="preview" href="./preview.html"><span class="nav-item-icon">🔎</span> 결과 미리보기</a>
+      <a class="nav-item" data-nav-link="export" href="./export.html"><span class="nav-item-icon">📤</span> 출력</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar">김</div>
+        <div class="user-info">
+          <div class="user-name">김영어 선생님</div>
+          <div class="user-email">teacher@school.kr</div>
+        </div>
+        <div class="bean-chip">🫘 240</div>
+      </div>
+    </div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-title">영어비서 서비스 Mock-up</div>
+      <div class="topbar-breadcrumb">랜딩 · 서비스 포지셔닝</div>
+    </div>
+    <div class="topbar-right">
+      <a class="btn btn-ghost" href="./projects.html">프로젝트 보기</a>
+      <a class="btn btn-primary" href="./generator-exam.html">MVP 시작</a>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="page-body">
+      <section class="page-hero">
+        <span class="mini-badge">Trusted Quality, Ready to Hand out</span>
+        <h1>영어강사를 위한 시험 대응 워크플로우 OS</h1>
+        <p>시험범위 입력부터 결과물 출력까지 최소 클릭으로 연결하고, 프로젝트 히스토리와 디자인 프리셋을 누적해 쓰면 쓸수록 빨라지는 구조를 보여주는 HTML 목업입니다.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="./project-create.html">프로젝트 만들기</a>
+          <a class="btn btn-ghost" href="./workspace.html">개인 DB 보기</a>
+        </div>
+        <div class="hero-kpis">
+          <div class="metric-card">
+            <div class="metric-label">핵심 가치</div>
+            <div class="metric-value">Speed-first</div>
+            <div class="metric-sub">최소 클릭 생성 플로우</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">핵심 가치</div>
+            <div class="metric-value">Zero-error</div>
+            <div class="metric-sub">정답/오타 검증 강조</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">핵심 가치</div>
+            <div class="metric-value">Preset Lock-in</div>
+            <div class="metric-sub">강사별 스타일 누적</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="landing-grid">
+        <div class="content-stack">
+          <section class="section-card">
+            <div class="section-card-title">왜 영어비서인가</div>
+            <div class="section-card-desc">PDF 초안의 Pain Point와 서비스 방향을 랜딩 구조로 재해석한 영역입니다.</div>
+            <div class="feature-grid">
+              <article class="feature-card">
+                <h3>시험범위의 폭발적 다양성</h3>
+                <p>학교, 출판사, 교사별 범위가 달라 한 명의 강사가 여러 시험 범위를 동시에 처리해야 하는 상황을 전제로 합니다.</p>
+              </article>
+              <article class="feature-card">
+                <h3>개인 DB화의 한계</h3>
+                <p>자료가 PC와 클라우드에 흩어져 있어도 프로젝트 기반 구조로 다시 묶어 히스토리로 재사용하게 만듭니다.</p>
+              </article>
+              <article class="feature-card">
+                <h3>Zero-error Quality</h3>
+                <p>생성 결과물 앞단에 검증 패널을 두어 바로 배포 가능한 제품 인상을 주는 것이 핵심입니다.</p>
+              </article>
+              <article class="feature-card">
+                <h3>Customized Design</h3>
+                <p>강사가 쓰던 HWP 스타일을 흉내내는 디자인 프리셋 구조를 목업 상에서 분명히 보여줍니다.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="section-card">
+            <div class="section-card-title">Service Model Line-up</div>
+            <div class="section-card-desc">Mock-up에서 전부 HTML 구조로 제공되는 핵심 생성기들입니다.</div>
+            <div class="type-grid" data-select-group="single">
+              <a class="type-card selected" data-selectable href="./generator-exam.html">
+                <div class="type-card-icon">📝</div>
+                <div class="type-card-name">동형모의고사</div>
+                <div class="type-card-desc">MVP 핵심 흐름</div>
+              </a>
+              <a class="type-card" data-selectable href="./generator-analysis.html">
+                <div class="type-card-icon">🔍</div>
+                <div class="type-card-name">지문분석지</div>
+                <div class="type-card-desc">페이지 조립형 분석지</div>
+              </a>
+              <a class="type-card" data-selectable href="./generator-workbook.html">
+                <div class="type-card-icon">📚</div>
+                <div class="type-card-name">워크북 / 주간지</div>
+                <div class="type-card-desc">유형 조합형 과제 제작</div>
+              </a>
+              <a class="type-card" data-selectable href="./generator-vocab.html">
+                <div class="type-card-icon">📖</div>
+                <div class="type-card-name">어휘 컨텐츠</div>
+                <div class="type-card-desc">단어장 + 테스트</div>
+              </a>
+              <a class="type-card" data-selectable href="./generator-minibook.html">
+                <div class="type-card-icon">📒</div>
+                <div class="type-card-name">미니북</div>
+                <div class="type-card-desc">A5 핵심 요약본</div>
+              </a>
+              <a class="type-card" data-selectable href="./workspace.html">
+                <div class="type-card-icon">🗃️</div>
+                <div class="type-card-name">개인 DB + Workspace</div>
+                <div class="type-card-desc">프로젝트 히스토리 축적</div>
+              </a>
+            </div>
+          </section>
+        </div>
+
+        <aside class="preview-panel">
+          <div class="preview-header">
+            <div class="preview-title">차별화 포인트</div>
+            <div class="preview-badge">Ver 1.0</div>
+          </div>
+          <div class="preview-body">
+            <div class="preview-row">
+              <div class="preview-key">MVP PRIORITY</div>
+              <div class="preview-val">동형모의고사 생성 하네스</div>
+            </div>
+            <div class="preview-row">
+              <div class="preview-key">LOCK-IN</div>
+              <div class="preview-tags">
+                <span class="preview-tag">개인 DB</span>
+                <span class="preview-tag">디자인 Preset</span>
+                <span class="preview-tag">프로젝트 히스토리</span>
+              </div>
+            </div>
+            <hr class="preview-divider">
+            <div class="preview-row">
+              <div class="preview-key">핵심 워크플로우</div>
+              <div class="preview-val">프로젝트 → 생성 → 검증 → 미리보기 → 출력</div>
+            </div>
+            <div class="preview-cost">
+              <div class="preview-cost-label">Mock-up 완료 범위</div>
+              <div class="preview-cost-val">11 Pages</div>
+              <div class="preview-cost-sub">공통 CSS/JS 기반으로 확장 가능한 하네스 구조</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <script src="./assets/js/app.js"></script>
+</body>
+</html>
