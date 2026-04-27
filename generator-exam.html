@@ -57,7 +57,7 @@
             <div class="section-card-title">프로젝트 정보 확인</div>
             <div class="section-card-desc">프로젝트 기본값을 기반으로 현재 컨텐츠의 기준값을 빠르게 구성합니다.</div>
             <div class="form-row single">
-              <div class="form-group"><label class="form-label">프로젝트 이름 <span class="required">*</span></label><input class="form-input" value="세화고 1학년 2026년 1학기 중간고사 Final 1차"></div>
+              <div class="form-group"><label class="form-label">컨텐츠 이름 <span class="required">*</span></label><input class="form-input" value="세화고 1학년 2026년 1학기 중간고사 Final 1차"></div>
             </div>
             <div class="form-row three">
               <div class="form-group"><label class="form-label">시/도</label><select class="form-select"><option>시/도 선택</option><option selected>서울특별시</option><option>경기도</option><option>인천광역시</option><option>부산광역시</option></select></div>
@@ -66,26 +66,7 @@
             </div>
             <div class="form-row">
               <div class="form-group"><label class="form-label">대상 학년</label><select class="form-select"><option selected>고등학교 1학년</option><option>고등학교 2학년</option><option>고등학교 3학년</option></select></div>
-              <div class="form-group"><label class="form-label">참고기출</label><select class="form-select"><option selected>2025 1학기 중간 / 기말</option><option>2025 2학기 중간 / 기말</option><option>2024 1학기 중간 / 기말</option></select></div>
-            </div>
-          </section>
-
-          <section class="section-card">
-            <div class="section-card-title">기출문제 선택 / 업로드</div>
-            <div class="section-card-desc">DB에서 선택하거나, DB에 없는 기출은 직접 업로드하는 흐름을 목업으로 보여줍니다.</div>
-            <table class="list-table">
-              <thead><tr><th>회차</th><th>학년</th><th>상태</th><th>적용</th></tr></thead>
-              <tbody>
-                <tr><td>2025 1학기 중간</td><td>고1</td><td><span class="status-soft">DB 보유</span></td><td>선택됨</td></tr>
-                <tr><td>2025 1학기 기말</td><td>고1</td><td><span class="status-soft">DB 보유</span></td><td>선택됨</td></tr>
-                <tr><td>2024 2학기 기말</td><td>고1</td><td><span class="status-soft">업로드 반영</span></td><td>후보</td></tr>
-              </tbody>
-            </table>
-            <hr class="section-divider">
-            <div class="upload-zone">
-              <div class="upload-icon">📄</div>
-              <div class="upload-title">기출 PDF/HWP 업로드 영역</div>
-              <div class="upload-desc">실제 업로드는 동작하지 않지만 업로드 후 교사 DB에 반영되는 흐름을 설명하기 위한 목업 영역입니다.</div>
+              <div class="form-group"><label class="form-label">참고기출(선택한 기출버전 유형으로 동형모의고사 출제)</label><select class="form-select" id="examReferenceSelect"><option selected>2025 1학기 중간 / 기말</option><option>2025 2학기 중간 / 기말</option><option>2024 1학기 중간 / 기말</option><option>직접 업로드</option></select></div>
             </div>
           </section>
 
@@ -93,17 +74,17 @@
             <div class="section-card-title">출제 범위 선택 / 업로드</div>
             <div class="section-card-desc">교과서, 모의고사, 부교재, handout 등을 하나의 생성 플로우 안에서 묶어 보여줍니다.</div>
             <div class="source-tabs">
-              <span class="source-tab active">교과서</span>
+              <span class="source-tab active" id="textbookTab" role="button" tabindex="0">교과서</span>
               <span class="source-tab">모의고사</span>
               <span class="source-tab">부교재</span>
               <span class="source-tab">Handout</span>
-              <span class="source-tab">직접 입력</span>
+              <span class="source-tab" id="directInputTab" role="button" tabindex="0">직접 입력</span>
             </div>
-            <div class="card-grid">
-              <div class="selectable-card selected" data-selectable><div class="selectable-card-title">리딩 기본 1과</div><div class="selectable-card-desc">본문 + After You Read</div></div>
-              <div class="selectable-card selected" data-selectable><div class="selectable-card-title">리딩 기본 2과</div><div class="selectable-card-desc">본문 + 핵심 문장</div></div>
-              <div class="selectable-card" data-selectable><div class="selectable-card-title">2025 6월 모의고사</div><div class="selectable-card-desc">18, 19, 31-34번</div></div>
-              <div class="selectable-card" data-selectable><div class="selectable-card-title">부교재 클래스</div><div class="selectable-card-desc">Chapter 4 Reading</div></div>
+            <div class="card-grid" id="sourceCardGrid">
+              <div class="selectable-card selected removable-source-card" data-selectable><button class="generated-range-remove" type="button" aria-label="리딩 기본 1과 삭제">X</button><div class="selectable-card-title">리딩 기본 1과</div><div class="selectable-card-desc">본문 + After You Read</div></div>
+              <div class="selectable-card selected removable-source-card" data-selectable><button class="generated-range-remove" type="button" aria-label="리딩 기본 2과 삭제">X</button><div class="selectable-card-title">리딩 기본 2과</div><div class="selectable-card-desc">본문 + 핵심 문장</div></div>
+              <div class="selectable-card removable-source-card" data-selectable><button class="generated-range-remove" type="button" aria-label="2025 6월 모의고사 삭제">X</button><div class="selectable-card-title">2025 6월 모의고사</div><div class="selectable-card-desc">18, 19, 31-34번</div></div>
+              <div class="selectable-card removable-source-card" data-selectable><button class="generated-range-remove" type="button" aria-label="부교재 클래스 삭제">X</button><div class="selectable-card-title">부교재 클래스</div><div class="selectable-card-desc">Chapter 4 Reading</div></div>
             </div>
           </section>
 
@@ -113,7 +94,7 @@
             <div class="form-row three">
               <div class="form-group"><label class="form-label">해설지 옵션</label><select class="form-select"><option>빠른정답</option><option selected>간단해설</option><option>전체해설</option></select></div>
               <div class="form-group"><label class="form-label">출력 포맷</label><select class="form-select"><option selected>HWP</option><option>HWPX</option><option>PDF</option></select></div>
-              <div class="form-group"><label class="form-label">디자인 프리셋</label><select class="form-select"><option selected>세화고 동형 A</option><option>세화고 동형 B</option><option>학원 표준형</option></select></div>
+              <div class="form-group"><label class="form-label">디자인 프리셋</label><select class="form-select"><option selected>김영어 동형 디자인 A</option><option>김영어 동형 디자인 B</option><option>학원 표준형</option></select></div>
             </div>
             <div class="toggle-row"><div><div class="toggle-label">정답 자동 검증</div><div class="toggle-desc">복수 AI cross-check를 시각적으로 표현</div></div><div class="toggle-switch on"></div></div>
             <div class="toggle-row"><div><div class="toggle-label">오타 감지</div><div class="toggle-desc">배포 전 오류 검출 단계를 전면에 배치</div></div><div class="toggle-switch on"></div></div>
@@ -143,7 +124,279 @@
       </div>
     </div>
   </main>
+
+  <div class="modal-backdrop" id="examUploadModal" hidden>
+    <div class="modal-card">
+      <section class="section-card" style="margin-bottom:0;">
+        <div class="modal-head">
+          <div>
+            <div class="section-card-title">기출문제 선택 / 업로드</div>
+            <div class="section-card-desc">DB에서 선택하거나, DB에 없는 기출은 직접 업로드하는 흐름을 목업으로 보여줍니다.</div>
+          </div>
+          <button class="btn btn-ghost modal-close" type="button" id="examUploadModalClose">닫기</button>
+        </div>
+        <table class="list-table">
+          <thead><tr><th>회차</th><th>학년</th><th>상태</th><th>적용</th></tr></thead>
+          <tbody>
+            <tr><td>2025 1학기 중간</td><td>고1</td><td><span class="status-soft">DB 보유</span></td><td>선택됨</td></tr>
+            <tr><td>2025 1학기 기말</td><td>고1</td><td><span class="status-soft">DB 보유</span></td><td>선택됨</td></tr>
+            <tr><td>2024 2학기 기말</td><td>고1</td><td><span class="status-soft">업로드 반영</span></td><td>후보</td></tr>
+          </tbody>
+        </table>
+        <hr class="section-divider">
+        <div class="upload-zone">
+          <div class="upload-icon">📄</div>
+          <div class="upload-title">기출 PDF/HWP 업로드 영역</div>
+          <div class="upload-desc">실제 업로드는 동작하지 않지만 업로드 후 교사 DB에 반영되는 흐름을 설명하기 위한 목업 영역입니다.</div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="directInputModal" hidden>
+    <div class="modal-card">
+      <section class="section-card" style="margin-bottom:0;">
+        <div class="modal-head">
+          <div>
+            <div class="section-card-title">pdf/hwp 문서 업로드</div>
+            <div class="section-card-desc">직접 입력 탭에서 문서를 업로드해 출제 범위를 추가하는 흐름을 목업으로 보여줍니다.</div>
+          </div>
+          <button class="btn btn-ghost modal-close" type="button" id="directInputModalClose">닫기</button>
+        </div>
+        <div class="upload-zone">
+          <div class="upload-icon">📄</div>
+          <div class="upload-title">pdf/hwp 문서 업로드</div>
+          <div class="upload-desc">실제 업로드는 동작하지 않지만 업로드한 문서를 출제 범위 소스로 추가하는 흐름을 설명하기 위한 목업 영역입니다.</div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="textbookModal" hidden>
+    <div class="modal-card">
+      <section class="section-card" style="margin-bottom:0;">
+        <div class="modal-head">
+          <div>
+            <div class="section-card-title">교과서 범위 입력</div>
+            <div class="section-card-desc">출판사와 단원을 선택한 뒤 출제범위를 추가할 수 있습니다.</div>
+          </div>
+          <button class="btn btn-ghost modal-close" type="button" id="textbookModalClose">닫기</button>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">출판사 선택</label>
+            <select class="form-select" id="textbookPublisherSelect">
+              <option selected>능률(민)</option>
+              <option>천재(이)</option>
+              <option>YBM(박)</option>
+              <option>비상(홍)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">단원</label>
+            <select class="form-select" id="textbookUnitSelect">
+              <option>1과</option>
+              <option selected>2과</option>
+              <option>3과</option>
+              <option>4과</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn-row" style="margin-bottom:16px;">
+          <button class="btn btn-primary" type="button" id="addTextbookRangeButton">출제범위 추가</button>
+        </div>
+        <div class="section-card-desc" style="margin-bottom:10px;">출제범위</div>
+        <div class="added-range-list" id="textbookRangeList"></div>
+      </section>
+    </div>
+  </div>
+
   <script src="./assets/js/app.js"></script>
   <script src="./assets/js/state-demo.js"></script>
+  <script>
+    (function () {
+      const select = document.getElementById('examReferenceSelect');
+      const modal = document.getElementById('examUploadModal');
+      const closeButton = document.getElementById('examUploadModalClose');
+      const directInputTab = document.getElementById('directInputTab');
+      const directInputModal = document.getElementById('directInputModal');
+      const directInputCloseButton = document.getElementById('directInputModalClose');
+      const textbookTab = document.getElementById('textbookTab');
+      const textbookModal = document.getElementById('textbookModal');
+      const textbookModalClose = document.getElementById('textbookModalClose');
+      const textbookPublisherSelect = document.getElementById('textbookPublisherSelect');
+      const textbookUnitSelect = document.getElementById('textbookUnitSelect');
+      const addTextbookRangeButton = document.getElementById('addTextbookRangeButton');
+      const textbookRangeList = document.getElementById('textbookRangeList');
+      const sourceCardGrid = document.getElementById('sourceCardGrid');
+      if (!select || !modal || !closeButton || !directInputTab || !directInputModal || !directInputCloseButton || !textbookTab || !textbookModal || !textbookModalClose || !textbookPublisherSelect || !textbookUnitSelect || !addTextbookRangeButton || !textbookRangeList || !sourceCardGrid) return;
+
+      const uploadOptionIndex = select.options.length - 1;
+
+      const openModal = () => {
+        modal.hidden = false;
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeModal = () => {
+        modal.hidden = true;
+        document.body.style.overflow = '';
+      };
+
+      const openDirectInputModal = () => {
+        directInputModal.hidden = false;
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeDirectInputModal = () => {
+        directInputModal.hidden = true;
+        document.body.style.overflow = '';
+      };
+
+      const openTextbookModal = () => {
+        textbookModal.hidden = false;
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeTextbookModal = () => {
+        syncTextbookRangesToGrid();
+        textbookModal.hidden = true;
+        document.body.style.overflow = '';
+      };
+
+      const ensureRangeItem = (label) => {
+        const existing = Array.from(textbookRangeList.children).find((item) => item.dataset.rangeLabel === label);
+        if (existing) return;
+
+        const item = document.createElement('div');
+        item.className = 'added-range-item';
+        item.dataset.rangeLabel = label;
+        item.textContent = label;
+        textbookRangeList.appendChild(item);
+      };
+
+      const createGridCard = (label) => {
+        const card = document.createElement('div');
+        card.className = 'selectable-card selected generated-range-card';
+        card.dataset.generatedRange = label;
+
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.className = 'generated-range-remove';
+        removeButton.setAttribute('aria-label', label + ' 삭제');
+        removeButton.textContent = 'X';
+        removeButton.addEventListener('click', (event) => {
+          event.stopPropagation();
+          card.remove();
+          const rangeItem = Array.from(textbookRangeList.children).find((item) => item.dataset.rangeLabel === label);
+          if (rangeItem) {
+            rangeItem.remove();
+          }
+        });
+
+        const title = document.createElement('div');
+        title.className = 'selectable-card-title';
+        title.textContent = label;
+
+        const desc = document.createElement('div');
+        desc.className = 'selectable-card-desc';
+        desc.textContent = '교과서 범위 추가';
+
+        card.appendChild(removeButton);
+        card.appendChild(title);
+        card.appendChild(desc);
+        return card;
+      };
+
+      const syncTextbookRangesToGrid = () => {
+        const labels = Array.from(textbookRangeList.children).map((item) => item.dataset.rangeLabel).filter(Boolean);
+        Array.from(sourceCardGrid.querySelectorAll('[data-generated-range]')).forEach((card) => {
+          if (!labels.includes(card.dataset.generatedRange)) {
+            card.remove();
+          }
+        });
+
+        labels.forEach((label) => {
+          const existing = sourceCardGrid.querySelector('[data-generated-range="' + label + '"]');
+          if (!existing) {
+            sourceCardGrid.appendChild(createGridCard(label));
+          }
+        });
+      };
+
+      select.addEventListener('change', () => {
+        if (select.selectedIndex === uploadOptionIndex) {
+          openModal();
+        }
+      });
+
+      closeButton.addEventListener('click', closeModal);
+      modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          closeModal();
+        }
+      });
+
+      directInputTab.addEventListener('click', openDirectInputModal);
+      directInputTab.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openDirectInputModal();
+        }
+      });
+
+      textbookTab.addEventListener('click', openTextbookModal);
+      textbookTab.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openTextbookModal();
+        }
+      });
+
+      directInputCloseButton.addEventListener('click', closeDirectInputModal);
+      directInputModal.addEventListener('click', (event) => {
+        if (event.target === directInputModal) {
+          closeDirectInputModal();
+        }
+      });
+
+      textbookModalClose.addEventListener('click', closeTextbookModal);
+      textbookModal.addEventListener('click', (event) => {
+        if (event.target === textbookModal) {
+          closeTextbookModal();
+        }
+      });
+
+      sourceCardGrid.querySelectorAll('.removable-source-card .generated-range-remove').forEach((button) => {
+        button.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const card = button.closest('.removable-source-card');
+          if (card) {
+            card.remove();
+          }
+        });
+      });
+
+      addTextbookRangeButton.addEventListener('click', () => {
+        const label = textbookPublisherSelect.value + ' - ' + textbookUnitSelect.value;
+        ensureRangeItem(label);
+      });
+
+      ensureRangeItem('능률(민) - 2과');
+      syncTextbookRangesToGrid();
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !modal.hidden) {
+          closeModal();
+        }
+        if (event.key === 'Escape' && !directInputModal.hidden) {
+          closeDirectInputModal();
+        }
+        if (event.key === 'Escape' && !textbookModal.hidden) {
+          closeTextbookModal();
+        }
+      });
+    }());
+  </script>
 </body>
 </html>
