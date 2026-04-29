@@ -322,6 +322,11 @@
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.08);
 }
 
+.reference-picker-input[readonly] {
+  cursor: pointer;
+  background-color: var(--bg);
+}
+
 .form-hint {
   font-size: 12px;
   color: var(--text-muted);
@@ -845,6 +850,32 @@
   color: var(--text-muted);
   font-size: 12px;
   font-weight: 700;
+}
+
+.reference-option-row {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.reference-option-row:hover {
+  background: rgba(79, 70, 229, 0.05);
+}
+
+.reference-option-row.is-selected {
+  background: rgba(79, 70, 229, 0.1);
+}
+
+.reference-option-radio {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.upload-zone.is-highlighted {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.08);
 }
 
 .kanban-list {

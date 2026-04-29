@@ -38,7 +38,7 @@
     <div class="sidebar-footer"><div class="sidebar-user"><div class="user-avatar">김</div><div class="user-info"><div class="user-name">김영어 선생님</div><div class="user-email">teacher@school.kr</div></div><div class="bean-chip">🫘 240</div></div></div>
   </aside>
   <header class="topbar">
-    <div class="topbar-left"><div class="topbar-title">내신 동형 모의고사 만들기</div><div class="topbar-breadcrumb">컨텐츠 > 동형 모의고사 생성</div></div>
+    <div class="topbar-left"><div class="topbar-title">동형 모의고사 만들기</div><div class="topbar-breadcrumb">컨텐츠 > 동형 모의고사 생성</div></div>
     <div class="topbar-right"><a class="btn btn-ghost" href="./projects.html">프로젝트로</a><a class="btn btn-primary" href="./preview.html">결과 보기</a></div>
   </header>
   <main class="main">
@@ -66,7 +66,7 @@
             </div>
             <div class="form-row">
               <div class="form-group"><label class="form-label">대상 학년</label><select class="form-select"><option selected>고등학교 1학년</option><option>고등학교 2학년</option><option>고등학교 3학년</option></select></div>
-              <div class="form-group"><label class="form-label">참고기출(선택한 기출버전 유형으로 동형모의고사 출제)</label><select class="form-select" id="examReferenceSelect"><option selected>2025 1학기 중간 / 기말</option><option>2025 2학기 중간 / 기말</option><option>2024 1학기 중간 / 기말</option><option>직접 업로드</option></select></div>
+              <div class="form-group"><label class="form-label">참고기출(선택한 기출버전 유형으로 동형모의고사 출제)</label><input class="form-input reference-picker-input" id="examReferenceSelect" type="text" value="2025 1학기 중간" readonly role="button" tabindex="0" aria-haspopup="dialog" aria-label="참고기출 선택"><input id="examReferenceFileInput" type="file" accept=".pdf,.hwp,.hwpx,application/pdf" hidden></div>
             </div>
           </section>
 
@@ -136,15 +136,36 @@
           <button class="btn btn-ghost modal-close" type="button" id="examUploadModalClose">닫기</button>
         </div>
         <table class="list-table">
-          <thead><tr><th>회차</th><th>학년</th><th>상태</th><th>적용</th></tr></thead>
-          <tbody>
-            <tr><td>2025 1학기 중간</td><td>고1</td><td><span class="status-soft">DB 보유</span></td><td>선택됨</td></tr>
-            <tr><td>2025 1학기 기말</td><td>고1</td><td><span class="status-soft">DB 보유</span></td><td>선택됨</td></tr>
-            <tr><td>2024 2학기 기말</td><td>고1</td><td><span class="status-soft">업로드 반영</span></td><td>후보</td></tr>
+          <thead><tr><th>회차</th><th>학년</th><th>상태</th><th>선택</th></tr></thead>
+          <tbody id="examReferenceTableBody">
+            <tr class="reference-option-row is-selected" data-reference-option="2025-1-midterm" tabindex="0" role="radio" aria-checked="true">
+              <td>2025 1학기 중간</td>
+              <td>고1</td>
+              <td><span class="status-soft">DB 보유</span></td>
+              <td><input class="reference-option-radio" type="radio" name="examReferenceOption" value="2025-1-midterm" checked aria-label="2025 1학기 중간 선택"></td>
+            </tr>
+            <tr class="reference-option-row" data-reference-option="2025-1-final" tabindex="0" role="radio" aria-checked="false">
+              <td>2025 1학기 기말</td>
+              <td>고1</td>
+              <td><span class="status-soft">DB 보유</span></td>
+              <td><input class="reference-option-radio" type="radio" name="examReferenceOption" value="2025-1-final" aria-label="2025 1학기 기말 선택"></td>
+            </tr>
+            <tr class="reference-option-row" data-reference-option="2024-2-final" tabindex="0" role="radio" aria-checked="false">
+              <td>2024 2학기 기말</td>
+              <td>고1</td>
+              <td><span class="status-soft">업로드 반영</span></td>
+              <td><input class="reference-option-radio" type="radio" name="examReferenceOption" value="2024-2-final" aria-label="2024 2학기 기말 선택"></td>
+            </tr>
+            <tr class="reference-option-row" data-reference-option="direct-upload" tabindex="0" role="radio" aria-checked="false">
+              <td>직접업로드</td>
+              <td>-</td>
+              <td><span class="status-soft">파일 선택</span></td>
+              <td><input class="reference-option-radio" type="radio" name="examReferenceOption" value="direct-upload" aria-label="직접업로드 선택"></td>
+            </tr>
           </tbody>
         </table>
         <hr class="section-divider">
-        <div class="upload-zone">
+        <div class="upload-zone" id="examUploadZone">
           <div class="upload-icon">📄</div>
           <div class="upload-title">기출 PDF/HWP 업로드 영역</div>
           <div class="upload-desc">실제 업로드는 동작하지 않지만 업로드 후 교사 DB에 반영되는 흐름을 설명하기 위한 목업 영역입니다.</div>
@@ -212,10 +233,13 @@
   </div>
 
   <script src="./assets/js/app.js"></script>
+  <script src="./assets/js/project-store.js"></script>
+  <script src="./assets/js/project-runtime.js"></script>
   <script src="./assets/js/state-demo.js"></script>
   <script>
     (function () {
-      const select = document.getElementById('examReferenceSelect');
+      const referenceInput = document.getElementById('examReferenceSelect');
+      const examReferenceFileInput = document.getElementById('examReferenceFileInput');
       const modal = document.getElementById('examUploadModal');
       const closeButton = document.getElementById('examUploadModalClose');
       const directInputTab = document.getElementById('directInputTab');
@@ -229,9 +253,11 @@
       const addTextbookRangeButton = document.getElementById('addTextbookRangeButton');
       const textbookRangeList = document.getElementById('textbookRangeList');
       const sourceCardGrid = document.getElementById('sourceCardGrid');
-      if (!select || !modal || !closeButton || !directInputTab || !directInputModal || !directInputCloseButton || !textbookTab || !textbookModal || !textbookModalClose || !textbookPublisherSelect || !textbookUnitSelect || !addTextbookRangeButton || !textbookRangeList || !sourceCardGrid) return;
+      const examReferenceTableBody = document.getElementById('examReferenceTableBody');
+      const examUploadZone = document.getElementById('examUploadZone');
+      if (!referenceInput || !examReferenceFileInput || !modal || !closeButton || !directInputTab || !directInputModal || !directInputCloseButton || !textbookTab || !textbookModal || !textbookModalClose || !textbookPublisherSelect || !textbookUnitSelect || !addTextbookRangeButton || !textbookRangeList || !sourceCardGrid || !examReferenceTableBody || !examUploadZone) return;
 
-      const uploadOptionIndex = select.options.length - 1;
+      let uploadedReferenceFileName = '';
 
       const openModal = () => {
         modal.hidden = false;
@@ -262,6 +288,35 @@
         syncTextbookRangesToGrid();
         textbookModal.hidden = true;
         document.body.style.overflow = '';
+      };
+
+      const getReferenceLabel = (selectedValue) => {
+        const selectedRow = examReferenceTableBody.querySelector('[data-reference-option="' + selectedValue + '"]');
+        if (!selectedRow) return '';
+        const firstCell = selectedRow.querySelector('td');
+        return firstCell ? firstCell.textContent.trim() : '';
+      };
+
+      const syncExamReferenceSelection = (selectedValue) => {
+        const rows = Array.from(examReferenceTableBody.querySelectorAll('.reference-option-row'));
+        rows.forEach((row) => {
+          const isSelected = row.dataset.referenceOption === selectedValue;
+          const radio = row.querySelector('.reference-option-radio');
+          row.classList.toggle('is-selected', isSelected);
+          row.setAttribute('aria-checked', isSelected ? 'true' : 'false');
+          if (radio) {
+            radio.checked = isSelected;
+          }
+        });
+
+        examUploadZone.classList.toggle('is-highlighted', selectedValue === 'direct-upload');
+
+        if (selectedValue === 'direct-upload') {
+          referenceInput.value = uploadedReferenceFileName || '직접업로드';
+          return;
+        }
+
+        referenceInput.value = getReferenceLabel(selectedValue);
       };
 
       const ensureRangeItem = (label) => {
@@ -324,10 +379,45 @@
         });
       };
 
-      select.addEventListener('change', () => {
-        if (select.selectedIndex === uploadOptionIndex) {
+      referenceInput.addEventListener('click', openModal);
+      referenceInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
           openModal();
         }
+      });
+
+      examReferenceTableBody.addEventListener('click', (event) => {
+        const row = event.target.closest('.reference-option-row');
+        if (!row) return;
+        syncExamReferenceSelection(row.dataset.referenceOption);
+      });
+
+      examReferenceTableBody.addEventListener('change', (event) => {
+        const radio = event.target.closest('.reference-option-radio');
+        if (!radio) return;
+        syncExamReferenceSelection(radio.value);
+      });
+
+      examReferenceTableBody.addEventListener('keydown', (event) => {
+        const row = event.target.closest('.reference-option-row');
+        if (!row) return;
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          syncExamReferenceSelection(row.dataset.referenceOption);
+        }
+      });
+
+      examUploadZone.addEventListener('click', () => {
+        syncExamReferenceSelection('direct-upload');
+        examReferenceFileInput.click();
+      });
+
+      examReferenceFileInput.addEventListener('change', () => {
+        const file = examReferenceFileInput.files && examReferenceFileInput.files[0];
+        if (!file) return;
+        uploadedReferenceFileName = file.name;
+        syncExamReferenceSelection('direct-upload');
       });
 
       closeButton.addEventListener('click', closeModal);
@@ -383,6 +473,7 @@
       });
 
       ensureRangeItem('능률(민) - 2과');
+      syncExamReferenceSelection('2025-1-midterm');
       syncTextbookRangesToGrid();
 
       document.addEventListener('keydown', (event) => {
