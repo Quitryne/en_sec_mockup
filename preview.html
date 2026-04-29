@@ -12,59 +12,78 @@
 </head>
 <body data-nav="preview">
   <aside class="sidebar">
-    <a class="sidebar-logo" href="./index.html"><div class="logo-icon"><img src="./assets/img/영어비서2.png" alt="영어비서 로고"></div><span class="logo-text">영어비서</span></a>
+    <a class="sidebar-logo" href="./index.html">
+      <div class="logo-icon"><img src="./assets/img/영어비서2.png" alt="영어비서 로고"></div>
+      <span class="logo-text">영어비서</span>
+    </a>
     <nav class="sidebar-nav">
       <div class="nav-section-label">워크스페이스</div>
       <a class="nav-item" data-nav-link="projects" href="./projects.html"><span class="nav-item-icon">🗂️</span> 프로젝트</a>
       <a class="nav-item" data-nav-link="preview" href="./preview.html"><span class="nav-item-icon">🔎</span> 결과 미리보기</a>
       <a class="nav-item" data-nav-link="export" href="./export.html"><span class="nav-item-icon">📤</span> 출력</a>
     </nav>
-    <div class="sidebar-footer"><div class="sidebar-user"><div class="user-avatar">김</div><div class="user-info"><div class="user-name">김영어 선생님</div><div class="user-email">teacher@school.kr</div></div><div class="bean-chip">🫘 240</div></div></div>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar">김</div>
+        <div class="user-info">
+          <div class="user-name">김영어 선생님</div>
+          <div class="user-email">teacher@school.kr</div>
+        </div>
+        <div class="bean-chip">빈 240</div>
+      </div>
+    </div>
   </aside>
-  <header class="topbar"><div class="topbar-left"><div class="topbar-title">결과 미리보기</div><div class="topbar-breadcrumb">검증 · 미리보기 · 출력 직전</div></div><div class="topbar-right"><a class="btn btn-primary" href="./export.html">출력으로</a></div></header>
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-title">결과 미리보기</div>
+      <div class="topbar-breadcrumb">검증 · 미리보기 · 출력 직전</div>
+    </div>
+    <div class="topbar-right">
+      <a class="btn btn-primary" href="./export.html">출력으로</a>
+    </div>
+  </header>
+
   <main class="main">
     <div class="page-body">
       <div class="workspace-grid">
         <section class="section-card">
           <div class="section-card-title">페이지 썸네일</div>
-          <div class="section-card-desc">생성 결과의 일부 페이지를 고정 썸네일로 보여줍니다.</div>
+          <div class="section-card-desc">생성 결과를 빠르게 훑어볼 수 있는 썸네일 영역입니다.</div>
           <div class="thumb-grid">
-            <div class="thumb-card"><strong>1p 표지</strong><p>세화고 Final 1차</p></div>
-            <div class="thumb-card"><strong>2p 문항</strong><p>주제/제목 유형</p></div>
+            <div class="thumb-card"><strong>1p 표지</strong><p>한가람고 Final</p></div>
+            <div class="thumb-card"><strong>2p 문항</strong><p>주제 / 제목 유형</p></div>
             <div class="thumb-card"><strong>3p 문항</strong><p>빈칸 + 어법</p></div>
-            <div class="thumb-card"><strong>4p 해설</strong><p>간단해설 버전</p></div>
+            <div class="thumb-card"><strong>4p 해설</strong><p>간단 해설 버전</p></div>
           </div>
         </section>
+
         <aside class="preview-panel">
-          <div class="preview-header"><div class="preview-title">검증 상태</div><div class="preview-badge">출력 준비 완료</div></div>
+          <div class="preview-header">
+            <div class="preview-title">검증 상태</div>
+            <div class="preview-badge">출력 준비 완료</div>
+          </div>
           <div class="preview-body">
             <div class="preview-row"><div class="preview-key">정답 검증</div><div class="preview-val">검증 통과</div></div>
-            <div class="preview-row"><div class="preview-key">오타 감지</div><div class="preview-val">0건</div></div>
-            <div class="preview-row"><div class="preview-key">디자인 Preset</div><div class="preview-val">세화고 동형 A</div></div>
-            <div class="preview-row"><div class="preview-key">수정 포인트</div><div class="preview-tags"><span class="preview-tag">3번 문항 보기 길이</span><span class="preview-tag">해설 줄간격</span></div></div>
+            <div class="preview-row"><div class="preview-key">오탈자 감지</div><div class="preview-val">0건</div></div>
+            <div class="preview-row"><div class="preview-key">인쇄용 Preset</div><div class="preview-val">세화고 동형 A</div></div>
+            <div class="preview-row"><div class="preview-key">수정 사인오프</div><div class="preview-tags"><span class="preview-tag">3번 문항 길이 확인</span><span class="preview-tag">해설 중간점검</span></div></div>
           </div>
         </aside>
       </div>
 
       <section class="section-card" style="margin-top:20px;">
         <div class="section-card-title">문서 뷰어</div>
-        <div class="section-card-desc">중앙 결과 뷰어 역할을 하는 정적 문서 레이아웃입니다.</div>
+        <div class="section-card-desc">실제 결과 문서 미리보기를 이미지로 확인하는 영역입니다.</div>
         <div class="document-viewer">
           <div class="document-sheet">
-            <h2>세화고 1학년 2026년 1학기 중간고사 Final 1차</h2>
-            <p>Preset: 세화고 동형 A · 출력 형식: HWP · 해설지: 간단해설</p>
-            <hr class="preview-divider">
-            <ol>
-              <li>다음 글의 제목으로 가장 적절한 것을 고르시오.</li>
-              <li>빈칸에 들어갈 말로 가장 적절한 것은?</li>
-              <li>밑줄 친 부분 중 어법상 틀린 것을 고르시오.</li>
-              <li>글의 흐름으로 보아 주어진 문장이 들어갈 위치는?</li>
-            </ol>
+            <img class="document-preview-image" src="./assets/img/동형모의고사캡쳐.png" alt="[Image #1]">
           </div>
         </div>
       </section>
     </div>
   </main>
+
   <script src="./assets/js/app.js"></script>
   <script src="./assets/js/project-store.js"></script>
   <script src="./assets/js/project-runtime.js"></script>

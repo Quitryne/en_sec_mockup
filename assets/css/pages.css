@@ -96,6 +96,13 @@
   padding-left: 18px;
 }
 
+.document-preview-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
 .source-tabs {
   display: flex;
   gap: 8px;
@@ -111,6 +118,12 @@
   color: var(--text-sub);
   font-size: 12px;
   font-weight: 600;
+}
+
+.supplemental-options-panel {
+  margin-bottom: 16px;
+  padding: 20px;
+  background: linear-gradient(180deg, rgba(79, 70, 229, 0.04), rgba(255, 255, 255, 0.96));
 }
 
 .source-tab.active {

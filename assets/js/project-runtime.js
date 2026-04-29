@@ -27,6 +27,22 @@
     }
   }
 
+  function setSelectByTextOrAppend(select, text) {
+    if (!select || !text) return;
+    for (var index = 0; index < select.options.length; index += 1) {
+      if (select.options[index].text.trim() === text) {
+        select.selectedIndex = index;
+        return;
+      }
+    }
+
+    var option = document.createElement("option");
+    option.textContent = text;
+    option.value = text;
+    option.selected = true;
+    select.appendChild(option);
+  }
+
   function createTag(text) {
     var tag = document.createElement("span");
     tag.className = "preview-tag";
@@ -206,7 +222,7 @@
     if (!sections.length) return;
 
     var infoSection = sections[0];
-    var optionSection = sections[2];
+    var optionSection = sections[sections.length - 1];
     var inputs = infoSection.querySelectorAll(".form-input");
     var selects = infoSection.querySelectorAll(".form-select");
     var optionSelects = optionSection ? optionSection.querySelectorAll(".form-select") : [];
@@ -217,11 +233,17 @@
     if (inputs[0]) {
       inputs[0].value = project.title;
     }
+    if (selects[0]) {
+      setSelectByTextOrAppend(selects[0], project.region);
+    }
+    if (selects[1]) {
+      setSelectByTextOrAppend(selects[1], project.district);
+    }
     if (selects[2]) {
-      setSelectByText(selects[2], project.school);
+      setSelectByTextOrAppend(selects[2], project.school);
     }
     if (selects[3]) {
-      setSelectByText(selects[3], project.grade);
+      setSelectByTextOrAppend(selects[3], project.grade);
     }
 
     if (previewPanel) {
@@ -264,6 +286,8 @@
       var sourceCount = document.querySelectorAll("#sourceCardGrid .selectable-card").length;
       var updatedProject = window.ProjectStore.updateProject(project.id, {
         title: latestTitle || project.title,
+        region: getSelectedOptionText(selects[0]) || project.region,
+        district: getSelectedOptionText(selects[1]) || project.district,
         school: getSelectedOptionText(selects[2]) || project.school,
         grade: getSelectedOptionText(selects[3]) || project.grade,
         updatedAt: new Date().toISOString()

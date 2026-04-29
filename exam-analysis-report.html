@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기출문제 분석 리포트 - 영어비서</title>
+<style>
+  /* ============ Design Tokens ============ */
+  :root {
+    --bg: #f7f8fa;
+    --surface: #ffffff;
+    --surface-alt: #fafbfc;
+    --border: #e6e8ec;
+    --border-strong: #d4d7dd;
+    --text: #1a1d23;
+    --text-sub: #5b6270;
+    --text-muted: #8a909a;
+    --primary: #4f46e5;
+    --primary-soft: #eef0ff;
+    --primary-hover: #4338ca;
+    --accent: #10b981;
+    --accent-soft: #e7f9f2;
+    --warning: #f59e0b;
+    --warning-soft: #fff7e6;
+    --danger: #ef4444;
+    --danger-soft: #fde8e8;
+    --info: #3b82f6;
+    --info-soft: #e8f1ff;
+    --radius-sm: 6px;
+    --radius: 10px;
+    --radius-lg: 14px;
+    --shadow-sm: 0 1px 2px rgba(20,22,30,0.04);
+    --shadow: 0 2px 8px rgba(20,22,30,0.06);
+    --shadow-lg: 0 8px 24px rgba(20,22,30,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 13px; font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--primary); color: white; }
+  .btn-primary:hover { background: var(--primary-hover); }
+  .btn-ghost { background: transparent; color: var(--text-sub); border-color: var(--border); }
+  .btn-ghost:hover { background: var(--bg); color: var(--text); }
+
+  /* ============ Main ============ */
+  .main {
+    min-height: 100vh;
+  }
+  .page-body {
+    padding: 28px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  /* ============ Report Header ============ */
+  .report-hero {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: white;
+    border-radius: var(--radius-lg);
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-lg);
+  }
+  .report-hero-label {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11.5px; font-weight: 600;
+    letter-spacing: 0.4px;
+    margin-bottom: 12px;
+  }
+  .report-hero-title { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .report-hero-sub { font-size: 13.5px; opacity: 0.85; }
+  .report-hero-meta {
+    display: flex; gap: 18px; flex-wrap: wrap;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.18);
+  }
+  .hero-meta-item { font-size: 12px; opacity: 0.9; }
+  .hero-meta-item strong { display: block; font-size: 14px; opacity: 1; margin-top: 2px; }
+
+  /* ============ Layout ============ */
+  .layout-wrap {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 20px;
+    align-items: start;
+  }
+  @media (max-width: 1100px) {
+    .layout-wrap { grid-template-columns: 1fr; }
+  }
+  .content-stack { display: flex; flex-direction: column; gap: 16px; }
+
+  /* ============ Section Card ============ */
+  .section-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 22px 24px;
+    box-shadow: var(--shadow-sm);
+  }
+  .section-card-head {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 16px; margin-bottom: 14px;
+  }
+  .section-card-title {
+    font-size: 16px; font-weight: 700; color: var(--text);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-card-title-icon {
+    width: 26px; height: 26px;
+    background: var(--primary-soft);
+    color: var(--primary);
+    border-radius: 7px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .section-card-desc {
+    font-size: 12.5px; color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  /* ============ Stats Grid ============ */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 720px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
+  .stat-card {
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+  .stat-card-label { font-size: 11.5px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+  .stat-card-value { font-size: 22px; font-weight: 700; color: var(--text); margin-top: 4px; }
+  .stat-card-sub { font-size: 12px; color: var(--text-sub); margin-top: 2px; }
+  .stat-card.is-primary { background: var(--primary-soft); border-color: #d6daff; }
+  .stat-card.is-primary .stat-card-value { color: var(--primary); }
+  .stat-card.is-warning { background: var(--warning-soft); border-color: #fde9b8; }
+  .stat-card.is-warning .stat-card-value { color: #b45309; }
+  .stat-card.is-accent { background: var(--accent-soft); border-color: #b8ecd6; }
+  .stat-card.is-accent .stat-card-value { color: #047857; }
+
+  /* ============ Tables ============ */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .data-table thead th {
+    text-align: left;
+    padding: 10px 12px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    background: var(--surface-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table tbody td {
+    padding: 11px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .data-table tbody tr:hover { background: var(--surface-alt); }
+  .data-table tbody tr:last-child td { border-bottom: none; }
+  .num-cell { font-weight: 600; color: var(--text); width: 50px; }
+  .point-cell { width: 56px; color: var(--text-sub); font-variant-numeric: tabular-nums; }
+
+  /* ============ Tags / Chips ============ */
+  .chip {
+    display: inline-flex; align-items: center;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 11.5px; font-weight: 600;
+    background: var(--bg);
+    color: var(--text-sub);
+  }
+  .chip.is-primary { background: var(--primary-soft); color: var(--primary); }
+  .chip.is-accent { background: var(--accent-soft); color: #047857; }
+  .chip.is-warning { background: var(--warning-soft); color: #b45309; }
+  .chip.is-danger { background: var(--danger-soft); color: var(--danger); }
+  .chip.is-info { background: var(--info-soft); color: var(--info); }
+
+  /* ============ Source/Topic List ============ */
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  @media (max-width: 720px) { .topic-grid { grid-template-columns: 1fr; } }
+  .topic-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    background: var(--surface);
+  }
+  .topic-card-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .topic-card-title { font-size: 13.5px; font-weight: 600; color: var(--text); }
+  .topic-card-desc { font-size: 12px; color: var(--text-muted); }
+
+  /* ============ Bullet Lists ============ */
+  .info-list { list-style: none; padding: 0; }
+  .info-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: 13px;
+    color: var(--text-sub);
+  }
+  .info-list li:last-child { border-bottom: none; }
+  .info-list li::before {
+    content: "";
+    flex-shrink: 0;
+    width: 6px; height: 6px;
+    margin-top: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+  }
+  .info-list.is-warning li::before { background: var(--warning); }
+  .info-list.is-danger li::before { background: var(--danger); }
+  .info-list.is-accent li::before { background: var(--accent); }
+  .info-list strong { color: var(--text); font-weight: 600; }
+
+  /* ============ Priority Bar ============ */
+  .priority-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .priority-row:last-child { border-bottom: none; }
+  .priority-rank {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--primary-soft);
+    color: var(--primary);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 12px;
+    flex-shrink: 0;
+  }
+  .priority-rank.is-1 { background: #fef3c7; color: #b45309; }
+  .priority-rank.is-2 { background: #fce7f3; color: #be185d; }
+  .priority-rank.is-3 { background: var(--primary-soft); color: var(--primary); }
+  .priority-rank.is-4 { background: var(--info-soft); color: var(--info); }
+  .priority-rank.is-5 { background: var(--accent-soft); color: #047857; }
+  .priority-content { flex: 1; }
+  .priority-title { font-size: 13.5px; font-weight: 600; color: var(--text); }
+  .priority-desc { font-size: 12.5px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ============ Callout ============ */
+  .callout {
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-top: 12px;
+    display: flex; gap: 12px;
+    font-size: 13px;
+    line-height: 1.65;
+  }
+  .callout-icon { font-size: 18px; flex-shrink: 0; }
+  .callout.is-warning { background: var(--warning-soft); color: #92400e; border-left: 3px solid var(--warning); }
+  .callout.is-danger { background: var(--danger-soft); color: #991b1b; border-left: 3px solid var(--danger); }
+  .callout.is-info { background: var(--info-soft); color: #1e40af; border-left: 3px solid var(--info); }
+  .callout.is-accent { background: var(--accent-soft); color: #065f46; border-left: 3px solid var(--accent); }
+
+  /* ============ Preview Panel (Sticky Sidebar) ============ */
+  .preview-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px 20px;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 24px;
+  }
+  .preview-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 14px;
+  }
+  .preview-title { font-size: 14px; font-weight: 700; }
+  .preview-badge {
+    background: var(--accent-soft);
+    color: #047857;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 11px; font-weight: 600;
+  }
+  .preview-row { padding: 10px 0; border-bottom: 1px dashed var(--border); }
+  .preview-row:last-child { border-bottom: none; }
+  .preview-key { font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px; }
+  .preview-val { font-size: 13px; color: var(--text); font-weight: 500; }
+  .preview-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+  .preview-tag {
+    background: var(--bg);
+    color: var(--text-sub);
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 11px; font-weight: 500;
+  }
+  .preview-quick {
+    background: var(--primary-soft);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    margin-top: 14px;
+  }
+  .preview-quick-title { font-size: 11px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.3px; }
+  .preview-quick-val { font-size: 18px; font-weight: 700; color: var(--text); margin-top: 4px; }
+  .preview-quick-sub { font-size: 12px; color: var(--text-sub); }
+
+  /* ============ Final Summary ============ */
+  .final-quote {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+    margin-top: 20px;
+    border-left: 4px solid var(--warning);
+  }
+  .final-quote-label {
+    font-size: 11px; font-weight: 700;
+    color: #b45309;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+  .final-quote-text {
+    font-size: 16px;
+    font-weight: 700;
+    color: #78350f;
+    line-height: 1.6;
+  }
+  .final-quote-sub {
+    font-size: 13px;
+    color: #92400e;
+    margin-top: 8px;
+    line-height: 1.65;
+  }
+
+  .btn-row { display: flex; gap: 8px; }
+
+  hr.section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 16px 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ Main ============ -->
+<main class="main">
+  <div class="page-body">
+
+    <!-- Hero -->
+    <div class="report-hero">
+      <span class="report-hero-label">📊 기출문제 분석 리포트</span>
+      <div class="report-hero-title">한가람고 2025학년도 1학년 1학기 중간고사 · 공통영어1</div>
+      <div class="report-hero-sub">출제 경향 · 어법 포인트 · 변별 문항 · 강사/학생 지도 가이드</div>
+      <div class="report-hero-meta">
+        <div class="hero-meta-item">시행일<strong>2025년 4월 29일 (화) 1교시</strong></div>
+        <div class="hero-meta-item">총 문항<strong>30문항 (선택 25 + 서답 5)</strong></div>
+        <div class="hero-meta-item">총 배점<strong>100점 (80 + 20)</strong></div>
+        <div class="hero-meta-item">분량<strong>총 3장 6면</strong></div>
+      </div>
+    </div>
+
+    <div class="layout-wrap">
+      <div class="content-stack">
+
+        <!-- 1. 시험 개요 -->
+        <section class="section-card">
+          <div class="section-card-head">
+            <div>
+              <div class="section-card-title"><span class="section-card-title-icon">📋</span> 시험 개요</div>
+              <div class="section-card-desc">시험의 기본 구성과 핵심 수치</div>
+            </div>
+          </div>
+          <div class="stat-grid">
+            <div class="stat-card is-primary">
+              <div class="stat-card-label">선택형</div>
+              <div class="stat-card-value">25<span style="font-size:14px; font-weight:500;">문항</span></div>
+              <div class="stat-card-sub">80점</div>
+            </div>
+            <div class="stat-card is-warning">
+              <div class="stat-card-label">서답형</div>
+              <div class="stat-card-value">5<span style="font-size:14px; font-weight:500;">문항</span></div>
+              <div class="stat-card-sub">20점 (어순배열·어법교정)</div>
+            </div>
+            <div class="stat-card is-accent">
+              <div class="stat-card-label">어법 비중</div>
+              <div class="stat-card-value">≈34<span style="font-size:14px; font-weight:500;">점</span></div>
+              <div class="stat-card-sub">전체의 약 34%</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-label">교과서 활용</div>
+              <div class="stat-card-value">7<span style="font-size:14px; font-weight:500;">문항</span></div>
+              <div class="stat-card-sub">약 22점 분량</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. 출제 범위 -->
+        <section class="section-card">
+          <div class="section-card-head">
+            <div>
+              <div class="section-card-title"><span class="section-card-title-icon">📚</span> 출제 범위 및 지문 구성</div>
+              <div class="section-card-desc">교과서 본문 · 외부 지문 · 시사 지문 3개 축으로 구성</div>
+            </div>
+          </div>
+
+          <div style="font-size:12.5px; font-weight:700; color:var(--text-sub); margin: 6px 0 8px;">📖 교과서 본문 지문</div>
+          <div class="topic-grid">
+            <div class="topic-card">
+              <div class="topic-card-head">
+                <div class="topic-card-title">Resilience: Recovering from Difficult Times</div>
+                <span class="chip is-primary">1~2번</span>
+              </div>
+              <div class="topic-card-desc">회복탄력성 · 면역 비유 · 어휘 변별</div>
+            </div>
+            <div class="topic-card">
+              <div class="topic-card-head">
+                <div class="topic-card-title">Matthew Syed의 탁구 이야기</div>
+                <span class="chip is-primary">3~5번</span>
+              </div>
+              <div class="topic-card-desc">성장 마인드셋 · 어법 (가)~(마) · 함축 의미</div>
+            </div>
+            <div class="topic-card">
+              <div class="topic-card-head">
+                <div class="topic-card-title">Vincent van Gogh &amp; Arles</div>
+                <span class="chip is-primary">6~7번</span>
+              </div>
+              <div class="topic-card-desc">예술가와 도시 · 분사 어법 집중</div>
+            </div>
+            <div class="topic-card">
+              <div class="topic-card-head">
+                <div class="topic-card-title">Cafe Terrace at Night (서답형 1)</div>
+                <span class="chip is-warning">서답 1</span>
+              </div>
+              <div class="topic-card-desc">현재완료 수동 어순 배열</div>
+            </div>
+          </div>
+
+          <hr class="section-divider">
+
+          <div style="font-size:12.5px; font-weight:700; color:var(--text-sub); margin: 6px 0 8px;">🌐 외부/모의고사 스타일 지문</div>
+          <div class="topic-grid">
+            <div class="topic-card"><div class="topic-card-title">빛이 건강에 미치는 영향</div><div class="topic-card-desc">sunlight · serotonin · melatonin (8번)</div></div>
+            <div class="topic-card"><div class="topic-card-title">정직한 마케팅과 소비자 심리</div><div class="topic-card-desc">제목 추론 (9번)</div></div>
+            <div class="topic-card"><div class="topic-card-title">"No man is an island"</div><div class="topic-card-desc">함축 의미 (10번)</div></div>
+            <div class="topic-card"><div class="topic-card-title">Gordon Parker 인물 일대기</div><div class="topic-card-desc">내용 일치 (11번)</div></div>
+            <div class="topic-card"><div class="topic-card-title">검열과 창작의 자유</div><div class="topic-card-desc">비판 대상 (12번)</div></div>
+            <div class="topic-card"><div class="topic-card-title">유전자 편집 윤리</div><div class="topic-card-desc">어휘 적절성 (13번)</div></div>
+            <div class="topic-card"><div class="topic-card-title">온라인 협업과 문화 인식</div><div class="topic-card-desc">빈칸 (14번)</div></div>
+            <div class="topic-card"><div class="topic-card-title">제스처 커뮤니케이션</div><div class="topic-card-desc">빈칸 (15번)</div></div>
+            <div class="topic-card"><div class="topic-card-title">식물의 의사소통</div><div class="topic-card-desc">무관한 문장 (16번)</div></div>
+            <div class="topic-card"><div class="topic-card-title">피부 전기전도도 &amp; 감정</div><div class="topic-card-desc">글의 순서 (17번)</div></div>
+            <div class="topic-card"><div class="topic-card-title">21세기 정보·지식 시대</div><div class="topic-card-desc">요약문 (18번)</div></div>
+            <div class="topic-card"><div class="topic-card-title">멜라토닌과 수면 (서답 4)</div><div class="topic-card-desc">본문 단어 찾기 5문항</div></div>
+          </div>
+
+          <hr class="section-divider">
+
+          <div style="font-size:12.5px; font-weight:700; color:var(--text-sub); margin: 6px 0 8px;">📰 시사 지문 (한국 관련 · 어법 주력)</div>
+          <div class="topic-grid">
+            <div class="topic-card"><div class="topic-card-title">"폭싹 속았수다" K-drama</div><div class="topic-card-desc">19번 어법</div></div>
+            <div class="topic-card"><div class="topic-card-title">의대 정원 / 의대생 복귀</div><div class="topic-card-desc">20번 어법</div></div>
+            <div class="topic-card"><div class="topic-card-title">영어 유치원 조기교육</div><div class="topic-card-desc">21번 어법</div></div>
+            <div class="topic-card"><div class="topic-card-title">조기교육의 사회적 영향</div><div class="topic-card-desc">22번 어법</div></div>
+            <div class="topic-card"><div class="topic-card-title">헌혈 인구 감소</div><div class="topic-card-desc">23번 밑줄 어법</div></div>
+            <div class="topic-card"><div class="topic-card-title">K-pop 한류 인식 조사</div><div class="topic-card-desc">24번 밑줄 어법</div></div>
+            <div class="topic-card"><div class="topic-card-title">인도네시아 노동자 영주권</div><div class="topic-card-desc">25번 (2개 고르기)</div></div>
+            <div class="topic-card"><div class="topic-card-title">산불 재난 (서답형 5)</div><div class="topic-card-desc">어법 4개 고쳐쓰기</div></div>
+          </div>
+        </section>
+
+        <!-- 3. 문항별 분석 -->
+        <section class="section-card">
+          <div class="section-card-head">
+            <div>
+              <div class="section-card-title"><span class="section-card-title-icon">🔍</span> 문항별 유형 분석</div>
+              <div class="section-card-desc">선택형 25문항 + 서답형 5문항 상세 매핑</div>
+            </div>
+          </div>
+
+          <div style="font-size:13px; font-weight:700; color:var(--text); margin: 10px 0 6px;">선택형 25문항</div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>유형</th>
+                <th>배점</th>
+                <th>핵심 포인트</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="num-cell">1</td><td>문장 삽입</td><td class="point-cell">3.2</td><td>Resilience 본문 흐름</td></tr>
+              <tr><td class="num-cell">2</td><td>빈칸 추론 (적절하지 <strong>않은</strong> 것)</td><td class="point-cell">3.1</td><td>어휘 변별 (avoid vs face/embrace)</td></tr>
+              <tr><td class="num-cell">3</td><td>주제·교훈 (적절하지 <strong>않은</strong> 것)</td><td class="point-cell">3.2</td><td>속담·격언 매칭</td></tr>
+              <tr><td class="num-cell">4</td><td>어법 (옳은 것)</td><td class="point-cell">3.0</td><td>본문 어법 종합 (him/play/which/try/What)</td></tr>
+              <tr><td class="num-cell">5</td><td>함축 의미 (적절하지 <strong>않은</strong> 것)</td><td class="point-cell">3.1</td><td>본문 표현 해석</td></tr>
+              <tr><td class="num-cell">6</td><td>어법 (옳은 것)</td><td class="point-cell">3.0</td><td>분사 / 관계사</td></tr>
+              <tr><td class="num-cell">7</td><td>내용 일치 (<strong>아닌</strong> 것)</td><td class="point-cell">3.0</td><td>Van Gogh 본문</td></tr>
+              <tr><td class="num-cell">8</td><td>내용 일치 (<strong>않는</strong> 것)</td><td class="point-cell">3.2</td><td>빛과 건강</td></tr>
+              <tr><td class="num-cell">9</td><td>제목 추론</td><td class="point-cell">3.0</td><td>마케팅 · 소비자 심리</td></tr>
+              <tr><td class="num-cell">10</td><td>함축 의미</td><td class="point-cell">3.2</td><td>"No man is an island"</td></tr>
+              <tr><td class="num-cell">11</td><td>인물 내용 일치</td><td class="point-cell">3.3</td><td>Gordon Parker 세부 정보</td></tr>
+              <tr><td class="num-cell">12</td><td>비판 대상 (<strong>아닌</strong> 것)</td><td class="point-cell">3.3</td><td>검열 · 표현의 자유</td></tr>
+              <tr><td class="num-cell">13</td><td>어휘 적절성</td><td class="point-cell">3.1</td><td>문맥 어휘 (gene editing)</td></tr>
+              <tr><td class="num-cell">14</td><td>빈칸 추론</td><td class="point-cell">3.2</td><td>significant vs minimal</td></tr>
+              <tr><td class="num-cell">15</td><td>빈칸 추론</td><td class="point-cell">3.2</td><td>excessive gestures</td></tr>
+              <tr><td class="num-cell">16</td><td>흐름과 무관한 문장</td><td class="point-cell">3.1</td><td>식물 의사소통</td></tr>
+              <tr><td class="num-cell">17</td><td>글의 순서</td><td class="point-cell">3.4</td><td>피부 전도도 (B-A-C)</td></tr>
+              <tr><td class="num-cell">18</td><td>요약문 (A·B·C 빈칸)</td><td class="point-cell">3.3</td><td>challenge / information / forecast</td></tr>
+              <tr><td class="num-cell">19</td><td>어법상 어색한 문장</td><td class="point-cell">3.3</td><td>K-drama 시사문</td></tr>
+              <tr><td class="num-cell">20</td><td>어법상 어색한 문장</td><td class="point-cell">3.3</td><td>의대 정원 시사문</td></tr>
+              <tr><td class="num-cell">21</td><td>어법상 어색한 문장</td><td class="point-cell">3.3</td><td>조기교육 시사문</td></tr>
+              <tr><td class="num-cell">22</td><td>어법상 어색한 문장</td><td class="point-cell">3.3</td><td>조기교육 사회 영향</td></tr>
+              <tr><td class="num-cell">23</td><td>밑줄 어법 (5개 중 1개)</td><td class="point-cell">3.2</td><td>헌혈 시사문</td></tr>
+              <tr><td class="num-cell">24</td><td>밑줄 어법 (5개 중 1개)</td><td class="point-cell">3.2</td><td>K-pop 시사문</td></tr>
+              <tr><td class="num-cell">25</td><td>밑줄 어법 (<strong>2개</strong> 고르기)</td><td class="point-cell">3.5</td><td>인도네시아 노동자 시사문</td></tr>
+            </tbody>
+          </table>
+
+          <hr class="section-divider">
+
+          <div style="font-size:13px; font-weight:700; color:var(--text); margin: 10px 0 6px;">서답형 5문항 (총 20점)</div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>유형</th>
+                <th>형식</th>
+                <th>배점</th>
+                <th>핵심 문법</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>서답 1</strong></td>
+                <td>어순 배열 (단어 추가 금지)</td>
+                <td class="point-cell">4점</td>
+                <td>수동태 + 현재완료 (Several of them have been recreated)</td>
+              </tr>
+              <tr>
+                <td><strong>서답 2</strong></td>
+                <td>어순 배열</td>
+                <td class="point-cell">3점</td>
+                <td><span class="chip is-info">so ~ that</span> 구문</td>
+              </tr>
+              <tr>
+                <td><strong>서답 3</strong></td>
+                <td>어순 배열</td>
+                <td class="point-cell">4점</td>
+                <td><span class="chip is-info">no longer</span> + 수동태</td>
+              </tr>
+              <tr>
+                <td><strong>서답 4</strong></td>
+                <td>본문에서 단어 찾기</td>
+                <td class="point-cell">5점</td>
+                <td>패러프레이징 능력 (멜라토닌 지문)</td>
+              </tr>
+              <tr>
+                <td><strong>서답 5</strong></td>
+                <td>어법상 어색한 4개 찾아 고치기</td>
+                <td class="point-cell">4점</td>
+                <td>분사 / 수동태 / to부정사 종합 (산불 지문)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout is-warning">
+            <span class="callout-icon">⚠️</span>
+            <div><strong>철자(Spelling) 주의</strong> — 서답형은 철자 오류 시 추가 감점 규정이 있습니다. 특히 <em>recreated, viewed, maintaining</em> 같은 단어의 정확한 스펠링을 반드시 확인하세요.</div>
+          </div>
+        </section>
+
+        <!-- 4. 핵심 출제 경향 -->
+        <section class="section-card">
+          <div class="section-card-head">
+            <div>
+              <div class="section-card-title"><span class="section-card-title-icon">📈</span> 핵심 출제 경향 분석</div>
+              <div class="section-card-desc">5가지 키 인사이트로 본 시험의 성격</div>
+            </div>
+          </div>
+
+          <div class="priority-row">
+            <div class="priority-rank is-1">①</div>
+            <div class="priority-content">
+              <div class="priority-title">어법(Grammar) 비중이 절대적으로 높음</div>
+              <div class="priority-desc">선택형 7문항(19~25번) + 서답형 3문항 = <strong>약 34점</strong>. 어법 정밀도가 변별의 핵심.</div>
+            </div>
+          </div>
+          <div class="priority-row">
+            <div class="priority-rank is-2">②</div>
+            <div class="priority-content">
+              <div class="priority-title">교과서 본문 활용도 높음</div>
+              <div class="priority-desc">1~7번(약 22점)이 교과서 본문에서 출제. <strong>본문 정독 + 어법 분석</strong>이 필수.</div>
+            </div>
+          </div>
+          <div class="priority-row">
+            <div class="priority-rank is-3">③</div>
+            <div class="priority-content">
+              <div class="priority-title">시사(현재성) 지문 대거 등장</div>
+              <div class="priority-desc">19~25번 어법 문제 모두가 <strong>2024~2025 한국 시사 이슈</strong>. 영자신문 헤드라인 학습이 유리.</div>
+            </div>
+          </div>
+          <div class="priority-row">
+            <div class="priority-rank is-4">④</div>
+            <div class="priority-content">
+              <div class="priority-title">어휘·문맥 추론 문제 변별</div>
+              <div class="priority-desc">단순 동의어가 아닌 <strong>문맥 속 의미 차이</strong>(face vs avoid, significant vs minimal)로 변별.</div>
+            </div>
+          </div>
+          <div class="priority-row">
+            <div class="priority-rank is-5">⑤</div>
+            <div class="priority-content">
+              <div class="priority-title">고난도 변별 문항 식별</div>
+              <div class="priority-desc">17번(글 순서, 3.4점), 25번(어법 2개, 3.5점), 서답 3·5번이 <strong>1·2등급을 가르는</strong> 핵심.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. 집중 출제 어법 포인트 -->
+        <section class="section-card">
+          <div class="section-card-head">
+            <div>
+              <div class="section-card-title"><span class="section-card-title-icon">⚡</span> 집중 출제 어법 포인트</div>
+              <div class="section-card-desc">우선순위별로 정리한 핵심 어법 11가지</div>
+            </div>
+          </div>
+          <ul class="info-list">
+            <li><div><strong>분사 vs 동사</strong> — located / dated / held / watching (Van Gogh 단원)</div></li>
+            <li><div><strong>수동태</strong> — was reported, are burning, was held</div></li>
+            <li><div><strong>현재완료 수동</strong> — have been recreated</div></li>
+            <li><div><strong>so ~ that 구문</strong> — so funny that I couldn't stop laughing</div></li>
+            <li><div><strong>no longer 위치</strong> — should no longer be viewed as separate from</div></li>
+            <li><div><strong>to부정사 vs 동명사</strong> — to assist / having carried</div></li>
+            <li><div><strong>주어-동사 수일치</strong> — depend → depends, have → has</div></li>
+            <li><div><strong>분사구문</strong> — offering / spreading</div></li>
+            <li><div><strong>관계대명사</strong> — which / what 구별</div></li>
+            <li><div><strong>동사형 일치</strong> — continue → continued, entering → enter</div></li>
+            <li><div><strong>The number of + 단수동사</strong> — 시사 지문 단골 함정</div></li>
+          </ul>
+        </section>
+
+        <!-- 6. 강사 지도 지침 -->
+        <section class="section-card">
+          <div class="section-card-head">
+            <div>
+              <div class="section-card-title"><span class="section-card-title-icon">🎓</span> 강사 지도 지침</div>
+              <div class="section-card-desc">학생 지도 시 우선순위별 액션 가이드</div>
+            </div>
+          </div>
+
+          <div style="font-size:13px; font-weight:700; color:var(--text); margin: 6px 0;">A. 본문 학습 전략</div>
+          <ul class="info-list">
+            <li><div><strong>Resilience 단원</strong> — 핵심 표현(adapt to / face / overcome / immune system 비유)을 빈칸·삽입 문제 형태로 반복 훈련.</div></li>
+            <li><div><strong>Matthew Syed 단원</strong> — (가)~(마) 어법 포인트 모두 분석 + <strong>밑줄 의미 함축</strong>(B "I've had enough", D "the boy likes the idea") 별도 연습.</div></li>
+            <li><div><strong>Van Gogh 단원</strong> — 분사 구문(located/dated/held/watching) 수동·능동 구별 집중 훈련.</div></li>
+          </ul>
+
+          <hr class="section-divider">
+
+          <div style="font-size:13px; font-weight:700; color:var(--text); margin: 6px 0;">B. 어법 집중 훈련 우선순위</div>
+          <div class="priority-row">
+            <div class="priority-rank is-1">1순위</div>
+            <div class="priority-content">
+              <div class="priority-title">분사 vs 동사 vs 수동태</div>
+              <div class="priority-desc">located, dated, held, was burning, was reported, offering</div>
+            </div>
+          </div>
+          <div class="priority-row">
+            <div class="priority-rank is-2">2순위</div>
+            <div class="priority-content">
+              <div class="priority-title">수일치</div>
+              <div class="priority-desc">depend → depends, the number of + 단수동사</div>
+            </div>
+          </div>
+          <div class="priority-row">
+            <div class="priority-rank is-3">3순위</div>
+            <div class="priority-content">
+              <div class="priority-title">to부정사 / 동명사</div>
+              <div class="priority-desc">have carried → having carried, to assist 형태</div>
+            </div>
+          </div>
+          <div class="priority-row">
+            <div class="priority-rank is-4">4순위</div>
+            <div class="priority-content">
+              <div class="priority-title">구문 단어 배열</div>
+              <div class="priority-desc">so~that, no longer, several of them have been recreated</div>
+            </div>
+          </div>
+          <div class="priority-row">
+            <div class="priority-rank is-5">5순위</div>
+            <div class="priority-content">
+              <div class="priority-title">관계사 / 분사구문</div>
+              <div class="priority-desc">which / what / who 구별</div>
+            </div>
+          </div>
+
+          <div class="callout is-info">
+            <span class="callout-icon">💡</span>
+            <div><strong>시사 영어 자료 권장</strong> — Korea Herald, Korea Times 헤드라인 기사를 가져와 어법 7개 표시 → 학생이 고치는 형태로 훈련하면 19~25번 대비에 직접적 효과.</div>
+          </div>
+        </section>
+
+        <!-- 7. 학생 학습 지침 -->
+        <section class="section-card">
+          <div class="section-card-head">
+            <div>
+              <div class="section-card-title"><span class="section-card-title-icon">📝</span> 학생 학습 지침</div>
+              <div class="section-card-desc">고득점을 위한 체크리스트 + 함정 회피 전략</div>
+            </div>
+          </div>
+
+          <div style="font-size:13px; font-weight:700; color:var(--accent); margin: 6px 0;">✅ 반드시 해야 할 것</div>
+          <ul class="info-list is-accent">
+            <li><div>교과서 본문 <strong>3개 단원 완벽 암기 수준</strong> (Resilience, Matthew Syed, Van Gogh &amp; Arles)</div></li>
+            <li><div>본문 속 <strong>모든 분사·관계사·수동태에 형광펜 표시</strong>하고 어법 설명할 수 있어야 함</div></li>
+            <li><div><strong>so~that, no longer, several of them have been p.p.</strong> 등 구문 직접 작문 연습</div></li>
+            <li><div>영자신문 헤드라인 기사 <strong>주 2~3편</strong> 읽기 (특히 Korea 관련)</div></li>
+            <li><div>함축 의미 문제(밑줄 친 표현 의미 파악) 유형 별도 연습</div></li>
+          </ul>
+
+          <hr class="section-divider">
+
+          <div style="font-size:13px; font-weight:700; color:var(--danger); margin: 6px 0;">⚠️ 흔한 실수 포인트</div>
+          <ul class="info-list is-danger">
+            <li><div>분사로 써야 할 자리에 <strong>동사 원형/과거형</strong>을 그대로 둠 (was located → located)</div></li>
+            <li><div><strong>the number of + 복수명사 + 단수동사</strong> (depend → depends)</div></li>
+            <li><div>시제 불일치 (continue → continued, has → had)</div></li>
+            <li><div><strong>to부정사 능동/수동</strong> 구별 (to entering → to enter)</div></li>
+            <li><div>서답형 <strong>추가 단어 사용 금지</strong> 규정 위반 (보기에 없는 be동사 추가)</div></li>
+            <li><div>서답형 <strong>철자 오류 추가 감점</strong> 주의 (recreated, viewed, maintaining)</div></li>
+          </ul>
+
+          <div class="callout is-accent">
+            <span class="callout-icon">⏱️</span>
+            <div>
+              <strong>시험 시간 배분 권장</strong><br>
+              선택형 25문항 → 35분 (1문항당 약 1분 20초) · 서답형 5문항 → 12분 · 검토 → 3분<br>
+              <em>17번·25번·서답 3번은 시간이 많이 들므로 표시 후 회귀 추천</em>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. 다음 시험 예상 -->
+        <section class="section-card">
+          <div class="section-card-head">
+            <div>
+              <div class="section-card-title"><span class="section-card-title-icon">🔮</span> 다음 시험(기말) 예상 출제 방향</div>
+              <div class="section-card-desc">출제자 패턴 기반 5가지 예측</div>
+            </div>
+          </div>
+          <ul class="info-list">
+            <li><div><strong>어법 비중은 동일하거나 더 높을 가능성</strong> — 출제자가 어법 변별을 선호함이 명확</div></li>
+            <li><div><strong>2학기 본문 + 시사 지문 결합</strong> 형태 유지 예상</div></li>
+            <li><div><strong>서답형 어순 배열(보기 단어 활용)</strong>은 고정 출제 유형으로 굳어진 것으로 보임</div></li>
+            <li><div><strong>밑줄 친 부분 함축 의미 추론</strong> 유형 지속 등장 예상</div></li>
+            <li><div>시사 지문은 <strong>시험 직전 1~2개월 한국 뉴스</strong> 위주 선별 가능성 → 시험 직전 기사 챙길 것</div></li>
+          </ul>
+        </section>
+
+        <!-- Final Quote -->
+        <div class="final-quote">
+          <div class="final-quote-label">📌 한 줄 총평</div>
+          <div class="final-quote-text">"교과서 본문을 어법 단위까지 해부하고, 한국 시사 영어 기사로 어법을 훈련한 학생이 고득점을 가져가는 시험."</div>
+          <div class="final-quote-sub">단순 독해력보다 <strong>어법 정밀도 + 구문 작문력</strong>이 변별의 핵심이며, <strong>서답형 11점</strong>의 확보 여부가 1등급/2등급을 가른다.</div>
+        </div>
+
+      </div>
+
+      <!-- ============ Sticky Preview Panel ============ -->
+      <aside class="preview-panel">
+        <div class="preview-header">
+          <div class="preview-title">분석 요약</div>
+          <div class="preview-badge">완료</div>
+        </div>
+        <div class="preview-row">
+          <div class="preview-key">학교</div>
+          <div class="preview-val">한가람고등학교</div>
+        </div>
+        <div class="preview-row">
+          <div class="preview-key">학년·학기</div>
+          <div class="preview-val">1학년 1학기 중간고사</div>
+        </div>
+        <div class="preview-row">
+          <div class="preview-key">시험 성격</div>
+          <div class="preview-tags">
+            <span class="preview-tag">어법 중심</span>
+            <span class="preview-tag">시사 지문</span>
+            <span class="preview-tag">서답형 강조</span>
+          </div>
+        </div>
+        <div class="preview-row">
+          <div class="preview-key">변별 포인트</div>
+          <div class="preview-val">17·25번 + 서답 3·5</div>
+        </div>
+        <div class="preview-row">
+          <div class="preview-key">필수 학습</div>
+          <div class="preview-tags">
+            <span class="preview-tag">교과서 3단원</span>
+            <span class="preview-tag">영자신문</span>
+            <span class="preview-tag">분사·수동</span>
+          </div>
+        </div>
+
+        <div class="preview-quick">
+          <div class="preview-quick-title">어법 배점 비중</div>
+          <div class="preview-quick-val">≈ 34 / 100</div>
+          <div class="preview-quick-sub">선택 23점 + 서답 11점</div>
+        </div>
+
+        <div class="btn-row" style="margin-top:14px; flex-direction:column;">
+          <a class="btn btn-primary" href="#" style="justify-content:center;">📥 PDF로 다운로드</a>
+          <a class="btn btn-ghost" href="#" style="justify-content:center;">동형 모의고사 만들기 →</a>
+        </div>
+      </aside>
+    </div>
+
+  </div>
+</main>
+
+</body>
+</html>

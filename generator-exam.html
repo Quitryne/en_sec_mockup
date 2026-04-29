@@ -71,14 +71,107 @@
           </section>
 
           <section class="section-card">
+            <div class="section-card-title">기출문제 분석리포트 생성</div>
+            <div class="section-card-desc">선택한 참고기출 기준으로 분석 리포트를 확인하거나 문서로 내려받을 수 있습니다.</div>
+            <div class="btn-row" style="margin-bottom:16px;">
+              <a class="btn btn-primary" href="./preview.html">현재화면에서 보기</a>
+              <a class="btn btn-ghost" href="./exam-analysis-report.html" id="examAnalysisReportPopupTrigger">문서로 다운로드</a>
+            </div>
+            <div class="form-row single">
+              <div class="form-group">
+                <label class="form-label">강사메모</label>
+                <input class="form-input" type="text" placeholder="분석리포트에 반영할 강사 메모를 입력하세요">
+              </div>
+            </div>
+          </section>
+
+          <section class="section-card">
             <div class="section-card-title">출제 범위 선택 / 업로드</div>
-            <div class="section-card-desc">교과서, 모의고사, 부교재, handout 등을 하나의 생성 플로우 안에서 묶어 보여줍니다.</div>
+            <div class="section-card-desc">교과서, 모의고사, 부교재 등을 하나의 생성 플로우 안에서 묶어 보여줍니다.</div>
             <div class="source-tabs">
               <span class="source-tab active" id="textbookTab" role="button" tabindex="0">교과서</span>
-              <span class="source-tab">모의고사</span>
-              <span class="source-tab">부교재</span>
-              <span class="source-tab">Handout</span>
+              <span class="source-tab" id="supplementalTab" role="button" tabindex="0">모의고사</span>
+              <span class="source-tab" id="publisherTab" role="button" tabindex="0">부교재</span>
               <span class="source-tab" id="directInputTab" role="button" tabindex="0">직접 입력</span>
+            </div>
+            <div class="section-card supplemental-options-panel" id="supplementalOptionsPanel" hidden>
+              <div class="section-card-title">모의고사 옵션 선택</div>
+              <div class="section-card-desc">학년, 연도, 출제월, 범위를 선택해 모의고사 출제 범위를 지정합니다.</div>
+              <div class="form-row four">
+                <div class="form-group">
+                  <label class="form-label">학년</label>
+                  <select class="form-select" id="supplementalGradeSelect">
+                    <option selected>고1</option>
+                    <option>고2</option>
+                    <option>고3</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">연도</label>
+                  <select class="form-select" id="supplementalYearSelect">
+                    <option selected>2026년</option>
+                    <option>2025년</option>
+                    <option>2024년</option>
+                    <option>2023년</option>
+                    <option>2022년</option>
+                    <option>2021년</option>
+                    <option>2020년</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">출제월</label>
+                  <select class="form-select" id="supplementalMonthSelect">
+                    <option selected>3월</option>
+                    <option>6월</option>
+                    <option>9월</option>
+                    <option>11월</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">범위</label>
+                  <select class="form-select" id="supplementalRangeModeSelect">
+                    <option selected>전체</option>
+                    <option>직접입력</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row single">
+                <div class="form-group">
+                  <label class="form-label">범위 직접입력</label>
+                  <input class="form-input" id="supplementalRangeInput" type="text" placeholder="예: 1-12, 31, 34" disabled>
+                </div>
+              </div>
+              <div class="btn-row">
+                <button class="btn btn-primary" type="button" id="addSupplementalRangeButton">출제범위 추가</button>
+              </div>
+            </div>
+            <div class="section-card supplemental-options-panel" id="publisherOptionsPanel" hidden>
+              <div class="section-card-title">부교재 옵션 선택</div>
+              <div class="section-card-desc">EBS 또는 사설출판사 교재를 dropdown에서 선택할 수 있습니다.</div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label"><input type="radio" name="publisherSourceType" id="publisherEbsRadio" value="ebs" checked> EBS</label>
+                  <select class="form-select" id="publisherEbsSelect">
+                    <option selected>올림포스 독해기본(1)</option>
+                    <option>올림포스 독해기본(2)</option>
+                    <option>수능특강 Light</option>
+                    <option>수능특강</option>
+                    <option>수능특강독해연습</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label"><input type="radio" name="publisherSourceType" id="publisherPrivateRadio" value="private"> 사설출판사</label>
+                  <select class="form-select" id="publisherPrivateSelect" disabled>
+                    <option selected>빠른독해바른독해</option>
+                    <option>리딩파워</option>
+                    <option>맞수 수능유형 기본편</option>
+                    <option>맞수 수능유형 실전</option>
+                  </select>
+                </div>
+              </div>
+              <div class="btn-row">
+                <button class="btn btn-primary" type="button" id="addPublisherRangeButton">출제범위 추가</button>
+              </div>
             </div>
             <div class="card-grid" id="sourceCardGrid">
               <div class="selectable-card selected removable-source-card" data-selectable><button class="generated-range-remove" type="button" aria-label="리딩 기본 1과 삭제">X</button><div class="selectable-card-title">리딩 기본 1과</div><div class="selectable-card-desc">본문 + After You Read</div></div>
@@ -246,16 +339,33 @@
       const directInputModal = document.getElementById('directInputModal');
       const directInputCloseButton = document.getElementById('directInputModalClose');
       const textbookTab = document.getElementById('textbookTab');
+      const supplementalTab = document.getElementById('supplementalTab');
+      const supplementalOptionsPanel = document.getElementById('supplementalOptionsPanel');
+      const publisherTab = document.getElementById('publisherTab');
+      const publisherOptionsPanel = document.getElementById('publisherOptionsPanel');
+      const publisherEbsRadio = document.getElementById('publisherEbsRadio');
+      const publisherPrivateRadio = document.getElementById('publisherPrivateRadio');
+      const publisherEbsSelect = document.getElementById('publisherEbsSelect');
+      const publisherPrivateSelect = document.getElementById('publisherPrivateSelect');
+      const addPublisherRangeButton = document.getElementById('addPublisherRangeButton');
+      const supplementalGradeSelect = document.getElementById('supplementalGradeSelect');
+      const supplementalYearSelect = document.getElementById('supplementalYearSelect');
+      const supplementalMonthSelect = document.getElementById('supplementalMonthSelect');
+      const supplementalRangeModeSelect = document.getElementById('supplementalRangeModeSelect');
+      const supplementalRangeInput = document.getElementById('supplementalRangeInput');
+      const addSupplementalRangeButton = document.getElementById('addSupplementalRangeButton');
       const textbookModal = document.getElementById('textbookModal');
       const textbookModalClose = document.getElementById('textbookModalClose');
       const textbookPublisherSelect = document.getElementById('textbookPublisherSelect');
       const textbookUnitSelect = document.getElementById('textbookUnitSelect');
       const addTextbookRangeButton = document.getElementById('addTextbookRangeButton');
       const textbookRangeList = document.getElementById('textbookRangeList');
+      const sourceTabs = document.querySelector('.source-tabs');
       const sourceCardGrid = document.getElementById('sourceCardGrid');
+      const examAnalysisReportPopupTrigger = document.getElementById('examAnalysisReportPopupTrigger');
       const examReferenceTableBody = document.getElementById('examReferenceTableBody');
       const examUploadZone = document.getElementById('examUploadZone');
-      if (!referenceInput || !examReferenceFileInput || !modal || !closeButton || !directInputTab || !directInputModal || !directInputCloseButton || !textbookTab || !textbookModal || !textbookModalClose || !textbookPublisherSelect || !textbookUnitSelect || !addTextbookRangeButton || !textbookRangeList || !sourceCardGrid || !examReferenceTableBody || !examUploadZone) return;
+      if (!referenceInput || !examReferenceFileInput || !modal || !closeButton || !directInputTab || !directInputModal || !directInputCloseButton || !textbookTab || !supplementalTab || !supplementalOptionsPanel || !publisherTab || !publisherOptionsPanel || !publisherEbsRadio || !publisherPrivateRadio || !publisherEbsSelect || !publisherPrivateSelect || !addPublisherRangeButton || !supplementalGradeSelect || !supplementalYearSelect || !supplementalMonthSelect || !supplementalRangeModeSelect || !supplementalRangeInput || !addSupplementalRangeButton || !textbookModal || !textbookModalClose || !textbookPublisherSelect || !textbookUnitSelect || !addTextbookRangeButton || !textbookRangeList || !sourceTabs || !sourceCardGrid || !examAnalysisReportPopupTrigger || !examReferenceTableBody || !examUploadZone) return;
 
       let uploadedReferenceFileName = '';
 
@@ -288,6 +398,56 @@
         syncTextbookRangesToGrid();
         textbookModal.hidden = true;
         document.body.style.overflow = '';
+      };
+
+      const showSupplementalOptions = () => {
+        supplementalOptionsPanel.hidden = false;
+        supplementalTab.classList.add('active');
+        publisherOptionsPanel.hidden = true;
+        publisherTab.classList.remove('active');
+      };
+
+      const hideSupplementalOptions = () => {
+        supplementalOptionsPanel.hidden = true;
+        supplementalTab.classList.remove('active');
+      };
+
+      const showPublisherOptions = () => {
+        publisherOptionsPanel.hidden = false;
+        publisherTab.classList.add('active');
+        supplementalOptionsPanel.hidden = true;
+        supplementalTab.classList.remove('active');
+      };
+
+      const hidePublisherOptions = () => {
+        publisherOptionsPanel.hidden = true;
+        publisherTab.classList.remove('active');
+      };
+
+      const syncPublisherSourceSelection = () => {
+        const useEbs = publisherEbsRadio.checked;
+        publisherEbsSelect.disabled = !useEbs;
+        publisherPrivateSelect.disabled = useEbs;
+      };
+
+      const syncSupplementalRangeInput = () => {
+        const useCustomRange = supplementalRangeModeSelect.value === '직접입력';
+        supplementalRangeInput.disabled = !useCustomRange;
+        if (!useCustomRange) {
+          supplementalRangeInput.value = '';
+        }
+      };
+
+      const openAnalysisReportPopup = () => {
+        const popupWidth = 1200;
+        const popupHeight = 820;
+        const left = Math.max(0, Math.round((window.screen.width - popupWidth) / 2));
+        const top = Math.max(0, Math.round((window.screen.height - popupHeight) / 2));
+        window.open(
+          './exam-analysis-report.html',
+          'examAnalysisReportPopup',
+          'width=' + popupWidth + ',height=' + popupHeight + ',left=' + left + ',top=' + top + ',resizable=yes,scrollbars=yes'
+        );
       };
 
       const getReferenceLabel = (selectedValue) => {
@@ -330,7 +490,7 @@
         textbookRangeList.appendChild(item);
       };
 
-      const createGridCard = (label) => {
+      const createGridCard = (label, description) => {
         const card = document.createElement('div');
         card.className = 'selectable-card selected generated-range-card';
         card.dataset.generatedRange = label;
@@ -355,9 +515,15 @@
 
         const desc = document.createElement('div');
         desc.className = 'selectable-card-desc';
+        if (description) {
+          desc.textContent = description;
+        }
         desc.textContent = '교과서 범위 추가';
 
         card.appendChild(removeButton);
+        if (description) {
+          desc.textContent = description;
+        }
         card.appendChild(title);
         card.appendChild(desc);
         return card;
@@ -379,12 +545,36 @@
         });
       };
 
+      const buildSupplementalRangeLabel = () => {
+        const rangeValue = supplementalRangeModeSelect.value === '직접입력'
+          ? (supplementalRangeInput.value.trim() || '범위 미입력')
+          : supplementalRangeModeSelect.value;
+        return [
+          supplementalYearSelect.value,
+          supplementalMonthSelect.value,
+          supplementalGradeSelect.value,
+          rangeValue
+        ].join(' / ');
+      };
+
+      const buildPublisherRangeLabel = () => {
+        if (publisherEbsRadio.checked) {
+          return ['EBS', publisherEbsSelect.value].join(' / ');
+        }
+        return ['사설출판사', publisherPrivateSelect.value].join(' / ');
+      };
+
       referenceInput.addEventListener('click', openModal);
       referenceInput.addEventListener('keydown', (event) => {
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
           openModal();
         }
+      });
+
+      examAnalysisReportPopupTrigger.addEventListener('click', (event) => {
+        event.preventDefault();
+        openAnalysisReportPopup();
       });
 
       examReferenceTableBody.addEventListener('click', (event) => {
@@ -418,6 +608,53 @@
         if (!file) return;
         uploadedReferenceFileName = file.name;
         syncExamReferenceSelection('direct-upload');
+      });
+
+      sourceTabs.addEventListener('click', (event) => {
+        const clickedTab = event.target.closest('.source-tab');
+        if (!clickedTab) return;
+        if (clickedTab === supplementalTab) {
+          showSupplementalOptions();
+          return;
+        }
+        if (clickedTab === publisherTab) {
+          showPublisherOptions();
+          return;
+        }
+        hideSupplementalOptions();
+        hidePublisherOptions();
+      });
+
+      supplementalTab.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          showSupplementalOptions();
+        }
+      });
+
+      publisherTab.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          showPublisherOptions();
+        }
+      });
+
+      publisherEbsRadio.addEventListener('change', syncPublisherSourceSelection);
+      publisherPrivateRadio.addEventListener('change', syncPublisherSourceSelection);
+      supplementalRangeModeSelect.addEventListener('change', syncSupplementalRangeInput);
+      addSupplementalRangeButton.addEventListener('click', () => {
+        const label = buildSupplementalRangeLabel();
+        const existing = sourceCardGrid.querySelector('[data-generated-range="' + label + '"]');
+        if (!existing) {
+          sourceCardGrid.appendChild(createGridCard(label, '모의고사 범위 추가'));
+        }
+      });
+      addPublisherRangeButton.addEventListener('click', () => {
+        const label = buildPublisherRangeLabel();
+        const existing = sourceCardGrid.querySelector('[data-generated-range="' + label + '"]');
+        if (!existing) {
+          sourceCardGrid.appendChild(createGridCard(label, '부교재 범위 추가'));
+        }
       });
 
       closeButton.addEventListener('click', closeModal);
@@ -474,6 +711,10 @@
 
       ensureRangeItem('능률(민) - 2과');
       syncExamReferenceSelection('2025-1-midterm');
+      hideSupplementalOptions();
+      hidePublisherOptions();
+      syncPublisherSourceSelection();
+      syncSupplementalRangeInput();
       syncTextbookRangesToGrid();
 
       document.addEventListener('keydown', (event) => {
