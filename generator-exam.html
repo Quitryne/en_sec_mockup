@@ -74,8 +74,8 @@
             <div class="section-card-title">기출문제 분석리포트 생성</div>
             <div class="section-card-desc">선택한 참고기출 기준으로 분석 리포트를 확인하거나 문서로 내려받을 수 있습니다.</div>
             <div class="btn-row" style="margin-bottom:16px;">
-              <a class="btn btn-primary" href="./preview.html">현재화면에서 보기</a>
-              <a class="btn btn-ghost" href="./exam-analysis-report.html" id="examAnalysisReportPopupTrigger">문서로 다운로드</a>
+              <a class="btn btn-primary" href="./exam-analysis-report.html" id="examAnalysisReportPopupTrigger">현재화면에서 보기</a>
+              <a class="btn btn-ghost" href="./export.html">문서로 다운로드</a>
             </div>
             <div class="form-row single">
               <div class="form-group">
@@ -277,11 +277,12 @@
           </div>
           <button class="btn btn-ghost modal-close" type="button" id="directInputModalClose">닫기</button>
         </div>
-        <div class="upload-zone">
+        <div class="upload-zone" id="directInputUploadZone">
           <div class="upload-icon">📄</div>
           <div class="upload-title">pdf/hwp 문서 업로드</div>
           <div class="upload-desc">실제 업로드는 동작하지 않지만 업로드한 문서를 출제 범위 소스로 추가하는 흐름을 설명하기 위한 목업 영역입니다.</div>
         </div>
+        <input id="directInputFileInput" type="file" accept=".pdf,.hwp,.hwpx,application/pdf" hidden>
       </section>
     </div>
   </div>
@@ -338,6 +339,8 @@
       const directInputTab = document.getElementById('directInputTab');
       const directInputModal = document.getElementById('directInputModal');
       const directInputCloseButton = document.getElementById('directInputModalClose');
+      const directInputUploadZone = document.getElementById('directInputUploadZone');
+      const directInputFileInput = document.getElementById('directInputFileInput');
       const textbookTab = document.getElementById('textbookTab');
       const supplementalTab = document.getElementById('supplementalTab');
       const supplementalOptionsPanel = document.getElementById('supplementalOptionsPanel');
@@ -365,7 +368,7 @@
       const examAnalysisReportPopupTrigger = document.getElementById('examAnalysisReportPopupTrigger');
       const examReferenceTableBody = document.getElementById('examReferenceTableBody');
       const examUploadZone = document.getElementById('examUploadZone');
-      if (!referenceInput || !examReferenceFileInput || !modal || !closeButton || !directInputTab || !directInputModal || !directInputCloseButton || !textbookTab || !supplementalTab || !supplementalOptionsPanel || !publisherTab || !publisherOptionsPanel || !publisherEbsRadio || !publisherPrivateRadio || !publisherEbsSelect || !publisherPrivateSelect || !addPublisherRangeButton || !supplementalGradeSelect || !supplementalYearSelect || !supplementalMonthSelect || !supplementalRangeModeSelect || !supplementalRangeInput || !addSupplementalRangeButton || !textbookModal || !textbookModalClose || !textbookPublisherSelect || !textbookUnitSelect || !addTextbookRangeButton || !textbookRangeList || !sourceTabs || !sourceCardGrid || !examAnalysisReportPopupTrigger || !examReferenceTableBody || !examUploadZone) return;
+      if (!referenceInput || !examReferenceFileInput || !modal || !closeButton || !directInputTab || !directInputModal || !directInputCloseButton || !directInputUploadZone || !directInputFileInput || !textbookTab || !supplementalTab || !supplementalOptionsPanel || !publisherTab || !publisherOptionsPanel || !publisherEbsRadio || !publisherPrivateRadio || !publisherEbsSelect || !publisherPrivateSelect || !addPublisherRangeButton || !supplementalGradeSelect || !supplementalYearSelect || !supplementalMonthSelect || !supplementalRangeModeSelect || !supplementalRangeInput || !addSupplementalRangeButton || !textbookModal || !textbookModalClose || !textbookPublisherSelect || !textbookUnitSelect || !addTextbookRangeButton || !textbookRangeList || !sourceTabs || !sourceCardGrid || !examAnalysisReportPopupTrigger || !examReferenceTableBody || !examUploadZone) return;
 
       let uploadedReferenceFileName = '';
 
@@ -655,6 +658,20 @@
         if (!existing) {
           sourceCardGrid.appendChild(createGridCard(label, '부교재 범위 추가'));
         }
+      });
+      directInputUploadZone.addEventListener('click', () => {
+        directInputFileInput.click();
+      });
+      directInputFileInput.addEventListener('change', () => {
+        const file = directInputFileInput.files && directInputFileInput.files[0];
+        if (!file) return;
+        const label = file.name;
+        const existing = sourceCardGrid.querySelector('[data-generated-range="' + label + '"]');
+        if (!existing) {
+          sourceCardGrid.appendChild(createGridCard(label, '직접입력 문서 추가'));
+        }
+        closeDirectInputModal();
+        directInputFileInput.value = '';
       });
 
       closeButton.addEventListener('click', closeModal);
