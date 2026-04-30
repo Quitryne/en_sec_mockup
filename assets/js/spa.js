@@ -317,6 +317,476 @@ function bindProjectCards() {
   });
 }
 
+function bindExamPage() {
+  var examPage = document.querySelector('.spa-page[data-route="exam"]');
+  if (!examPage || examPage.dataset.examBound === "true") {
+    return;
+  }
+
+  var referenceInput = examPage.querySelector("#examReferenceSelect");
+  var examReferenceFileInput = examPage.querySelector("#examReferenceFileInput");
+  var directInputTab = examPage.querySelector("#directInputTab");
+  var textbookTab = examPage.querySelector("#textbookTab");
+  var supplementalTab = examPage.querySelector("#supplementalTab");
+  var supplementalOptionsPanel = examPage.querySelector("#supplementalOptionsPanel");
+  var publisherTab = examPage.querySelector("#publisherTab");
+  var publisherOptionsPanel = examPage.querySelector("#publisherOptionsPanel");
+  var publisherEbsRadio = examPage.querySelector("#publisherEbsRadio");
+  var publisherPrivateRadio = examPage.querySelector("#publisherPrivateRadio");
+  var publisherEbsSelect = examPage.querySelector("#publisherEbsSelect");
+  var publisherPrivateSelect = examPage.querySelector("#publisherPrivateSelect");
+  var addPublisherRangeButton = examPage.querySelector("#addPublisherRangeButton");
+  var supplementalGradeSelect = examPage.querySelector("#supplementalGradeSelect");
+  var supplementalYearSelect = examPage.querySelector("#supplementalYearSelect");
+  var supplementalMonthSelect = examPage.querySelector("#supplementalMonthSelect");
+  var supplementalRangeModeSelect = examPage.querySelector("#supplementalRangeModeSelect");
+  var supplementalRangeInput = examPage.querySelector("#supplementalRangeInput");
+  var addSupplementalRangeButton = examPage.querySelector("#addSupplementalRangeButton");
+  var sourceTabs = examPage.querySelector(".source-tabs");
+  var sourceCardGrid = examPage.querySelector("#sourceCardGrid");
+  var examAnalysisReportPopupTrigger = examPage.querySelector("#examAnalysisReportPopupTrigger");
+  var modal = document.getElementById("examUploadModal");
+  var closeButton = document.getElementById("examUploadModalClose");
+  var examReferenceTableBody = document.getElementById("examReferenceTableBody");
+  var examUploadZone = document.getElementById("examUploadZone");
+  var directInputModal = document.getElementById("directInputModal");
+  var directInputCloseButton = document.getElementById("directInputModalClose");
+  var directInputUploadZone = document.getElementById("directInputUploadZone");
+  var directInputFileInput = document.getElementById("directInputFileInput");
+  var textbookModal = document.getElementById("textbookModal");
+  var textbookModalClose = document.getElementById("textbookModalClose");
+  var textbookPublisherSelect = document.getElementById("textbookPublisherSelect");
+  var textbookUnitSelect = document.getElementById("textbookUnitSelect");
+  var addTextbookRangeButton = document.getElementById("addTextbookRangeButton");
+  var textbookRangeList = document.getElementById("textbookRangeList");
+
+  if (
+    !referenceInput ||
+    !examReferenceFileInput ||
+    !directInputTab ||
+    !textbookTab ||
+    !supplementalTab ||
+    !supplementalOptionsPanel ||
+    !publisherTab ||
+    !publisherOptionsPanel ||
+    !publisherEbsRadio ||
+    !publisherPrivateRadio ||
+    !publisherEbsSelect ||
+    !publisherPrivateSelect ||
+    !addPublisherRangeButton ||
+    !supplementalGradeSelect ||
+    !supplementalYearSelect ||
+    !supplementalMonthSelect ||
+    !supplementalRangeModeSelect ||
+    !supplementalRangeInput ||
+    !addSupplementalRangeButton ||
+    !sourceTabs ||
+    !sourceCardGrid ||
+    !examAnalysisReportPopupTrigger ||
+    !modal ||
+    !closeButton ||
+    !examReferenceTableBody ||
+    !examUploadZone ||
+    !directInputModal ||
+    !directInputCloseButton ||
+    !directInputUploadZone ||
+    !directInputFileInput ||
+    !textbookModal ||
+    !textbookModalClose ||
+    !textbookPublisherSelect ||
+    !textbookUnitSelect ||
+    !addTextbookRangeButton ||
+    !textbookRangeList
+  ) {
+    return;
+  }
+
+  examPage.dataset.examBound = "true";
+
+  var uploadedReferenceFileName = "";
+
+  function openModal() {
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  function openDirectInputModal() {
+    directInputModal.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeDirectInputModal() {
+    directInputModal.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  function openTextbookModal() {
+    textbookModal.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeTextbookModal() {
+    syncTextbookRangesToGrid();
+    textbookModal.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  function showSupplementalOptions() {
+    supplementalOptionsPanel.hidden = false;
+    supplementalTab.classList.add("active");
+    publisherOptionsPanel.hidden = true;
+    publisherTab.classList.remove("active");
+  }
+
+  function hideSupplementalOptions() {
+    supplementalOptionsPanel.hidden = true;
+    supplementalTab.classList.remove("active");
+  }
+
+  function showPublisherOptions() {
+    publisherOptionsPanel.hidden = false;
+    publisherTab.classList.add("active");
+    supplementalOptionsPanel.hidden = true;
+    supplementalTab.classList.remove("active");
+  }
+
+  function hidePublisherOptions() {
+    publisherOptionsPanel.hidden = true;
+    publisherTab.classList.remove("active");
+  }
+
+  function syncPublisherSourceSelection() {
+    var useEbs = publisherEbsRadio.checked;
+    publisherEbsSelect.disabled = !useEbs;
+    publisherPrivateSelect.disabled = useEbs;
+  }
+
+  function syncSupplementalRangeInput() {
+    var useCustomRange = supplementalRangeModeSelect.value === "직접입력";
+    supplementalRangeInput.disabled = !useCustomRange;
+    if (!useCustomRange) {
+      supplementalRangeInput.value = "";
+    }
+  }
+
+  function openAnalysisReportPopup() {
+    var popupWidth = 1200;
+    var popupHeight = 820;
+    var left = Math.max(0, Math.round((window.screen.width - popupWidth) / 2));
+    var top = Math.max(0, Math.round((window.screen.height - popupHeight) / 2));
+    window.open(
+      "./exam-analysis-report.html",
+      "examAnalysisReportPopup",
+      "width=" + popupWidth + ",height=" + popupHeight + ",left=" + left + ",top=" + top + ",resizable=yes,scrollbars=yes"
+    );
+  }
+
+  function getReferenceLabel(selectedValue) {
+    var selectedRow = examReferenceTableBody.querySelector('[data-reference-option="' + selectedValue + '"]');
+    if (!selectedRow) return "";
+    var firstCell = selectedRow.querySelector("td");
+    return firstCell ? firstCell.textContent.trim() : "";
+  }
+
+  function syncExamReferenceSelection(selectedValue) {
+    Array.from(examReferenceTableBody.querySelectorAll(".reference-option-row")).forEach(function (row) {
+      var isSelected = row.dataset.referenceOption === selectedValue;
+      var radio = row.querySelector(".reference-option-radio");
+      row.classList.toggle("is-selected", isSelected);
+      row.setAttribute("aria-checked", isSelected ? "true" : "false");
+      if (radio) {
+        radio.checked = isSelected;
+      }
+    });
+
+    examUploadZone.classList.toggle("is-highlighted", selectedValue === "direct-upload");
+
+    if (selectedValue === "direct-upload") {
+      referenceInput.value = uploadedReferenceFileName || "직접업로드";
+      return;
+    }
+
+    referenceInput.value = getReferenceLabel(selectedValue);
+  }
+
+  function ensureRangeItem(label) {
+    var existing = Array.from(textbookRangeList.children).find(function (item) {
+      return item.dataset.rangeLabel === label;
+    });
+    if (existing) return;
+
+    var item = document.createElement("div");
+    item.className = "added-range-item";
+    item.dataset.rangeLabel = label;
+    item.textContent = label;
+    textbookRangeList.appendChild(item);
+  }
+
+  function createGridCard(label, description) {
+    var card = document.createElement("div");
+    card.className = "selectable-card selected generated-range-card";
+    card.dataset.generatedRange = label;
+
+    var removeButton = document.createElement("button");
+    removeButton.type = "button";
+    removeButton.className = "generated-range-remove";
+    removeButton.setAttribute("aria-label", label + " 삭제");
+    removeButton.textContent = "X";
+    removeButton.addEventListener("click", function (event) {
+      var rangeItem = Array.from(textbookRangeList.children).find(function (item) {
+        return item.dataset.rangeLabel === label;
+      });
+      event.stopPropagation();
+      card.remove();
+      if (rangeItem) {
+        rangeItem.remove();
+      }
+    });
+
+    var title = document.createElement("div");
+    title.className = "selectable-card-title";
+    title.textContent = label;
+
+    var desc = document.createElement("div");
+    desc.className = "selectable-card-desc";
+    desc.textContent = description || "교과서 범위 추가";
+
+    card.appendChild(removeButton);
+    card.appendChild(title);
+    card.appendChild(desc);
+    return card;
+  }
+
+  function syncTextbookRangesToGrid() {
+    var labels = Array.from(textbookRangeList.children).map(function (item) {
+      return item.dataset.rangeLabel;
+    }).filter(Boolean);
+
+    Array.from(sourceCardGrid.querySelectorAll("[data-generated-range]")).forEach(function (card) {
+      if (labels.indexOf(card.dataset.generatedRange) === -1) {
+        card.remove();
+      }
+    });
+
+    labels.forEach(function (label) {
+      var existing = sourceCardGrid.querySelector('[data-generated-range="' + label + '"]');
+      if (!existing) {
+        sourceCardGrid.appendChild(createGridCard(label));
+      }
+    });
+  }
+
+  function buildSupplementalRangeLabel() {
+    var rangeValue = supplementalRangeModeSelect.value === "직접입력"
+      ? (supplementalRangeInput.value.trim() || "범위 미입력")
+      : supplementalRangeModeSelect.value;
+
+    return [
+      supplementalYearSelect.value,
+      supplementalMonthSelect.value,
+      supplementalGradeSelect.value,
+      rangeValue
+    ].join(" / ");
+  }
+
+  function buildPublisherRangeLabel() {
+    if (publisherEbsRadio.checked) {
+      return ["EBS", publisherEbsSelect.value].join(" / ");
+    }
+    return ["사설출판사", publisherPrivateSelect.value].join(" / ");
+  }
+
+  referenceInput.addEventListener("click", openModal);
+  referenceInput.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openModal();
+    }
+  });
+
+  examAnalysisReportPopupTrigger.addEventListener("click", function (event) {
+    event.preventDefault();
+    openAnalysisReportPopup();
+  });
+
+  examReferenceTableBody.addEventListener("click", function (event) {
+    var row = event.target.closest(".reference-option-row");
+    if (!row) return;
+    syncExamReferenceSelection(row.dataset.referenceOption);
+  });
+
+  examReferenceTableBody.addEventListener("change", function (event) {
+    var radio = event.target.closest(".reference-option-radio");
+    if (!radio) return;
+    syncExamReferenceSelection(radio.value);
+  });
+
+  examReferenceTableBody.addEventListener("keydown", function (event) {
+    var row = event.target.closest(".reference-option-row");
+    if (!row) return;
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      syncExamReferenceSelection(row.dataset.referenceOption);
+    }
+  });
+
+  examUploadZone.addEventListener("click", function () {
+    syncExamReferenceSelection("direct-upload");
+    examReferenceFileInput.click();
+  });
+
+  examReferenceFileInput.addEventListener("change", function () {
+    var file = examReferenceFileInput.files && examReferenceFileInput.files[0];
+    if (!file) return;
+    uploadedReferenceFileName = file.name;
+    syncExamReferenceSelection("direct-upload");
+  });
+
+  sourceTabs.addEventListener("click", function (event) {
+    var clickedTab = event.target.closest(".source-tab");
+    if (!clickedTab) return;
+    if (clickedTab === supplementalTab) {
+      showSupplementalOptions();
+      return;
+    }
+    if (clickedTab === publisherTab) {
+      showPublisherOptions();
+      return;
+    }
+    hideSupplementalOptions();
+    hidePublisherOptions();
+  });
+
+  supplementalTab.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      showSupplementalOptions();
+    }
+  });
+
+  publisherTab.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      showPublisherOptions();
+    }
+  });
+
+  publisherEbsRadio.addEventListener("change", syncPublisherSourceSelection);
+  publisherPrivateRadio.addEventListener("change", syncPublisherSourceSelection);
+  supplementalRangeModeSelect.addEventListener("change", syncSupplementalRangeInput);
+
+  addSupplementalRangeButton.addEventListener("click", function () {
+    var label = buildSupplementalRangeLabel();
+    var existing = sourceCardGrid.querySelector('[data-generated-range="' + label + '"]');
+    if (!existing) {
+      sourceCardGrid.appendChild(createGridCard(label, "모의고사 범위 추가"));
+    }
+  });
+
+  addPublisherRangeButton.addEventListener("click", function () {
+    var label = buildPublisherRangeLabel();
+    var existing = sourceCardGrid.querySelector('[data-generated-range="' + label + '"]');
+    if (!existing) {
+      sourceCardGrid.appendChild(createGridCard(label, "부교재 범위 추가"));
+    }
+  });
+
+  directInputUploadZone.addEventListener("click", function () {
+    directInputFileInput.click();
+  });
+
+  directInputFileInput.addEventListener("change", function () {
+    var file = directInputFileInput.files && directInputFileInput.files[0];
+    var label;
+    var existing;
+    if (!file) return;
+    label = file.name;
+    existing = sourceCardGrid.querySelector('[data-generated-range="' + label + '"]');
+    if (!existing) {
+      sourceCardGrid.appendChild(createGridCard(label, "직접입력 문서 추가"));
+    }
+    closeDirectInputModal();
+    directInputFileInput.value = "";
+  });
+
+  closeButton.addEventListener("click", closeModal);
+  modal.addEventListener("click", function (event) {
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
+
+  directInputTab.addEventListener("click", openDirectInputModal);
+  directInputTab.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openDirectInputModal();
+    }
+  });
+
+  textbookTab.addEventListener("click", openTextbookModal);
+  textbookTab.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openTextbookModal();
+    }
+  });
+
+  directInputCloseButton.addEventListener("click", closeDirectInputModal);
+  directInputModal.addEventListener("click", function (event) {
+    if (event.target === directInputModal) {
+      closeDirectInputModal();
+    }
+  });
+
+  textbookModalClose.addEventListener("click", closeTextbookModal);
+  textbookModal.addEventListener("click", function (event) {
+    if (event.target === textbookModal) {
+      closeTextbookModal();
+    }
+  });
+
+  sourceCardGrid.querySelectorAll(".removable-source-card .generated-range-remove").forEach(function (button) {
+    button.addEventListener("click", function (event) {
+      var card = button.closest(".removable-source-card");
+      event.stopPropagation();
+      if (card) {
+        card.remove();
+      }
+    });
+  });
+
+  addTextbookRangeButton.addEventListener("click", function () {
+    var label = textbookPublisherSelect.value + " - " + textbookUnitSelect.value;
+    ensureRangeItem(label);
+  });
+
+  ensureRangeItem("능률(민) - 2과");
+  syncExamReferenceSelection("2025-1-midterm");
+  hideSupplementalOptions();
+  hidePublisherOptions();
+  syncPublisherSourceSelection();
+  syncSupplementalRangeInput();
+  syncTextbookRangesToGrid();
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && !modal.hidden) {
+      closeModal();
+    }
+    if (event.key === "Escape" && !directInputModal.hidden) {
+      closeDirectInputModal();
+    }
+    if (event.key === "Escape" && !textbookModal.hidden) {
+      closeTextbookModal();
+    }
+  });
+}
+
 window.addEventListener("hashchange", function () {
   setActivePage(normalizeRoute(location.hash));
 });
@@ -324,5 +794,6 @@ window.addEventListener("hashchange", function () {
 document.addEventListener("DOMContentLoaded", function () {
   bindRouteLinks();
   bindProjectCards();
+  bindExamPage();
   setActivePage(normalizeRoute(location.hash));
 });
